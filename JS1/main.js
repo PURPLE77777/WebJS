@@ -1,5 +1,5 @@
-let a=7;
-let b=5;
+let a=Number(prompt("Введите первое число:",""));
+let b=Number(prompt("Введите второе число:",""));
 console.log("До перестановки:\n"+"a="+a+", b="+b)
 let c=b;
 b=a;
