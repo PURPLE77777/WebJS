@@ -86,3 +86,112 @@ while(i<x3){
     }
     x3--;
 }
+console.log("ДЗ 1\n");
+let number_flat=Number(prompt("Введите номер вашей квартиры (1-100):",""));
+if(number_flat>0&number_flat<=100){
+    if(number_flat<=20){
+        console.log("Квартира под номером "+ number_flat +" находится в 1-ом подъезде");
+    }
+    else if(number_flat<=40&number_flat>20){
+        console.log("Квартира под номером "+ number_flat +" находится во 2-ом подъезде");
+    }
+    else if(number_flat<=60&number_flat>40){
+        console.log("Квартира под номером "+ number_flat +" находится в 3-ем подъезде");
+    }
+    else if(number_flat<=80&number_flat>60){
+        console.log("Квартира под номером "+ number_flat +" находится в 4-ом подъезде");
+    }
+    else if(number_flat<=100&number_flat>80){
+        console.log("Квартира под номером "+ number_flat +" находится в 5-ом подъезде");
+    }
+}
+else if(number_flat<=0|number_flat>100){
+    console.log("Такой квартиры нет");
+}
+console.log("ДЗ 2\n");
+let auto_mark=prompt("Введите одну из марок автомобилей (BMV, Ford, Peugeot, Toyota, Volkswagen, Nissan)","");
+switch(auto_mark){
+    case "BMV":
+        console.log(auto_mark+" - страна происхождения Германия");
+        break;
+    case "Ford":
+        console.log(auto_mark+" - страна происхождения США");
+        break;
+    case "Peugeot":
+        console.log(auto_mark+" - страна происхождения Франция");
+        break;
+    case "Toyota":
+        console.log(auto_mark+" - страна происхождения Япония");
+        break;
+    case "Volkswagen":
+        console.log(auto_mark+" - страна происхождения Германия");
+        break;
+    case "Nissan":
+        console.log(auto_mark+" - страна происхождения Япония");
+        break;
+    default:
+        console.log(auto_mark+" - страна происхождения неизвестна");
+        break;
+}
+console.log("ДЗ 3\n");
+while(true){
+    let year=Number(prompt("Введите год",""));
+    if(year>=0&year%4==0){
+        console.log(year+" год является високосным! :)");
+        break;
+    }
+    else if(year<0){
+        console.log("Введите корректный год");
+    }
+    else {
+        console.log(year+" год не является високосным");
+        break;
+    }
+}
+console.log("ДЗ 4\n");
+while(true){
+    let some_number=Number(prompt("Введите число от 1 до 20",""));
+    console.log("Таблица умножения введённого числа:");
+    if(some_number>0&some_number<=20){
+        for(let i=1;i<=10;i++){
+            console.log(some_number+"x"+i+"="+some_number*i);
+        }
+        break;
+    }
+    else{
+        console.log("Введите корректное число!");
+    }
+}
+console.log("ДЗ 5\n");
+let sum=0;
+for(let i=1; i<50;i++){
+    if(i%2==1|i==1){
+        sum+=i;
+    }
+}
+console.log("Сумма всех нечётных чисел от 1 до 50: "+sum);
+console.log("ДЗ 6\n");
+let first=0;
+let second=1;
+let next_number=0;
+console.log("Первые 15 чисел Фибоначчи:");
+console.log(first);
+for(let i=0;i<=13;i++){
+    first=second;
+    second=next_number;
+    next_number=first+second;
+    console.log(next_number);
+}
+console.log("ДЗ 7\n");
+for(let i=1;i<=8;i++){
+    if(i%2==1){
+        console.log("\t#\t#\t#\t#");
+    }
+    else{
+        console.log("#\t#\t#\t#\t");
+    }
+}
+console.log("ДЗ 7 с использованием конкатенации\n");
+for(let i=1;i<=4;i++){
+    console.log("\t#\t#\t#\t#"+"\n#\t#\t#\t#\t");
+}
