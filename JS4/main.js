@@ -105,19 +105,21 @@ console.log(ray);
 //Задание 2: напишите функцию, которая удаляет из массива повторяющиеся элементы и возвращает обновлённый массив
 function rep() {
     let index;
-    let counter=-1;
+    let counter=0;
     for(let i=0; i<array.length-1;i++){
-        if(array.indexOf(array[i],i+1)>-1){
-            counter++;
-            index=array.indexOf(array[i],i+1);
-            array.fill("delete",index,index+1);
+        if(array[i]!=="delete"){
+            if(array.indexOf(array[i],i+1)>-1){
+                counter++;
+                index=array.indexOf(array[i],i+1);
+                array.fill("delete",index,index+1);
+            }
         }
     }
-    for(let i=0;i<=counter;i++){
-        if(array.lastIndexOf("delete",0)>-1){
-        index=array.lastIndexOf("delete",0);
+    for(let i=0;i<counter;i++){
+        // if(array.lastIndexOf("delete",0)>-1){
+        index=array.lastIndexOf("delete");
         array.splice(index,1);
-        }
+        // }
     }
     if(counter==0){
         console.log("Ваш массив без повторений");
@@ -129,6 +131,7 @@ let elementsArray=prompt("Введите кол-во элементов в ма�
 for(let i=0;i<elementsArray;i++){
     array[i]=prompt("Введите "+(i+1)+" элемент массива:");
 }
+console.log("Введёный вами массив: "+array);
 rep(array);
 
 
