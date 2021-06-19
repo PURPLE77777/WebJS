@@ -135,6 +135,36 @@ console.log("Введёный вами массив: "+array);
 rep(array);
 
 
+//Задание 3: напишите функцию, удаляющую из массива все элементы, которые при приведении к типу Boolean дают false.
+function rep() {
+    let index;
+    let counter=0;
+    for(let i=0; i<array.length-1;i++){
+        if(array[i]!=="delete"){
+            if(Boolean(Number(array[i]))===false){
+                counter++;
+                array[i]="delete";
+            }
+        }
+    }
+    for(let i=0;i<counter;i++){
+        index=array.lastIndexOf("delete");
+        array.splice(index,1);
+    }
+    if(counter==0){
+        console.log("Все элементы вашего массива дают true");
+    }
+    return array;
+}
+let array=[];
+let elementsArray=prompt("Введите кол-во элементов в массиве:");
+for(let i=0;i<elementsArray;i++){
+    array[i]=prompt("Введите "+(i+1)+" элемент массива:");
+}
+console.log("Введёный вами массив: "+array);
+rep(array);
+
+
 //ДЗ
 
 
