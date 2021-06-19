@@ -169,6 +169,46 @@ rep(array);
 
 
 //Звдввние 1: используя встроенную функцию Math.random(), напишите собственную функцию getRandomArray(len), которая возвращает массив случайных чисел длиной len.
+function getRandomArray() {
+    let randarray=[];
+    for(let i=0;i<len;i++){
+        randarray[i]=Math.round(Math.random()*100)/100;
+    }
+    return randarray;
+}
 
 
+//Задание 2: выведите в консоль элементы массива, которые больше среднего арифметического всех элементов.
+function zad2() {
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    let sum=0;
+    for(let i=0;i<len;i++){
+        sum+=array[i];
+    }
+    console.log("Среднее арифметическое: "+Math.round(sum/len*100)/100);
+    console.log("Элементы массива, которые больше среднего арифметического всех элементов:");
+    for(let i=0;i<len;i++){
+        if(array[i]>Math.round(sum/len*100)/100)
+        console.log(array[i]);
+    }
+}
+let len=Number(prompt("Введите длину массива:"));
+zad2();
 
+
+//Задание 3: найдите два наименьших элемента массива.
+function zad3() {
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    array.sort();
+    let min1=array[0];
+    let min2=array[1];
+    console.log("Первый наименьший элемент массива: "+min1);
+    console.log("Второй наименьший элемент массива: "+min2);
+}
+len=Number(prompt("Введите длину массива:"));
+zad3();
+
+
+//Задание 4: удалите из массива все элементы, меньшие 0.3. Сдвиньте все оставшиеся элементы вперёд, а на освободившиеся места вставьте нули.
