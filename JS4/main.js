@@ -30,7 +30,6 @@ console.log("Преобразованный массив из задания 2:"
 let arrNew=[];
 for(let i=1;i<=arr.length;i++){
     arrNew[i-1]=arr[arr.length-i];
-
 }
 for(let i=0;i<arr.length;i++){
     arr[i]=arrNew[i];
