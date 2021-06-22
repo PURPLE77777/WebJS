@@ -169,6 +169,14 @@ rep(array);
 //Звдввние 1: используя встроенную функцию Math.random(), напишите собственную функцию getRandomArray(len), которая возвращает массив случайных чисел длиной len.
 
 
+function getRandomArray() {
+    let randarray=[];
+    for(let i=0;i<len;i++){
+        randarray[i]=Math.round(Math.random()*100)/100;
+    }
+    return randarray;
+}
+
 
 //Задание 2: выведите в консоль элементы массива, которые больше среднего арифметического всех элементов.
 function zad2() {
@@ -347,10 +355,3 @@ function zad9(shift){
 }
 let len=Number(prompt("Введите длину массива:"));
 zad9(Number(prompt("Введите желаемый сдвиг элементов массива:")));
-function getRandomArray() {
-    let randarray=[];
-    for(let i=0;i<len;i++){
-        randarray[i]=Math.round(Math.random()*100)/100;
-    }
-    return randarray;
-}
