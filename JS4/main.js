@@ -116,10 +116,8 @@ function rep() {
         }
     }
     for(let i=0;i<counter;i++){
-        // if(array.lastIndexOf("delete",0)>-1){
         index=array.lastIndexOf("delete");
         array.splice(index,1);
-        // }
     }
     if(counter==0){
         console.log("Ваш массив без повторений");
@@ -169,13 +167,7 @@ rep(array);
 
 
 //Звдввние 1: используя встроенную функцию Math.random(), напишите собственную функцию getRandomArray(len), которая возвращает массив случайных чисел длиной len.
-function getRandomArray() {
-    let randarray=[];
-    for(let i=0;i<len;i++){
-        randarray[i]=Math.round(Math.random()*100)/100;
-    }
-    return randarray;
-}
+
 
 
 //Задание 2: выведите в консоль элементы массива, которые больше среднего арифметического всех элементов.
@@ -201,9 +193,23 @@ zad2();
 function zad3() {
     let array=getRandomArray(len);
     console.log("Получившийся массив: "+array);
-    array.sort();
+    // Первый метод
+    /*array.sort();
     let min1=array[0];
-    let min2=array[1];
+    let min2=array[1];*/
+    //Второй метод
+    let min1=array[0];
+    let min2=array[0];
+    for(let i=0;i<len;i++){
+        if(min1>array[i]){
+            min1=array[i];
+        }
+    }
+    for(let i=0;i<len;i++){
+        if(min2>array[i]&array[i]!==min1){
+            min2=array[i];
+        }
+    }
     console.log("Первый наименьший элемент массива: "+min1);
     console.log("Второй наименьший элемент массива: "+min2);
 }
@@ -212,3 +218,139 @@ zad3();
 
 
 //Задание 4: удалите из массива все элементы, меньшие 0.3. Сдвиньте все оставшиеся элементы вперёд, а на освободившиеся места вставьте нули.
+
+
+function zad4(){
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    for(;len!==0;len--){
+        if(array[len-1]<0.3){
+            let index=len-1;
+            for(;index!==-1;index--){ //передвигает значения элементов массива вперёд
+                array[index]=array[index-1];
+            }
+            array[0]=0;
+            index=len-1;
+            for(;index!==-1;index--){ //проверка на то, есть ли ещё значения >=0.3
+                if(array[index]>=0.3){
+                    len++;
+                    break;
+                }
+            }
+        }
+    }
+    console.log("Итоговый массив: "+array);
+}
+let len=Number(prompt("Введите длину массива:"));
+zad4();
+
+
+//Задание 5: попарно сложите элементы двух массивов равной длины: первый массива 1 с последним массива 2, второй массива 1 с предпоследним массива 2 и так далее. Верните массив с результатами сложения.
+
+
+function zad5(){
+    let array1=getRandomArray(len);
+    let array2=getRandomArray(len);
+    let arrayOfSum=[len];
+    console.log("Получившийся 1-ый массив: "+array1);
+    console.log("Получившийся 2-ой массив: "+array2);
+    for(let i=0;i<len;i++){
+        arrayOfSum[i]=Math.round((array1[i]+array2[len-i-1])*100)/100;
+    }
+    console.log("Итоговый массив: "+arrayOfSum);
+}
+let len=Number(prompt("Введите длину массива:"));
+zad5();
+
+
+//Задаине 6: отсортируйте массив методом пузырька.
+
+
+function zad6(){
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    for(let j=0;j<len-1;j++){
+        for(let i=0;i<len-1;i++){
+            if(array[i]>array[i+1]){
+                let intm=array[i];
+                array[i]=array[i+1];
+                array[i+1]=intm;
+            }
+        }
+    }
+    console.log("Итоговый массив: "+array);
+}
+let len=Number(prompt("Введите длину массива:"));
+zad6();
+
+
+//Задание 7: проверьте, есть ли в массиве два числа, сумма которых очень близка к 1 (0.999 < sum < 1.001). Если такая пара (или такие пары) есть, выведите их в консоль.
+
+
+function zad7(){
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    let counter=0;
+    let control=[]; //массив, проверяющий, есть ли похожие пары чисел
+    for(let j=0;j<len-1;j++){
+        for(let i=j+1;i<len-1;i++){
+            if(array[j]+array[i]>=0.99&array[j]+array[i]<=1.01){ 
+                if(control.indexOf(array[i])>-1&control.indexOf(array[j])>-1){ //проверка на то, была ли эта пара чисел найдена раньше
+                    continue;
+                }
+                else {
+                    if(control.indexOf(array[i])==-1)
+                    control.push(array[i]);
+                    if(control.indexOf(array[j])==-1)
+                    control.push(array[j]);
+                    console.log("Сумма чисел "+array[j]+" и "+array[i]+" близка к 1");
+                    counter++;
+                }
+            }
+        }
+    }
+    if(counter==0)
+    console.log("Нету пар чисел, сумма которых близка к единице");
+}
+let len=Number(prompt("Введите длину массива:"));
+zad7();
+
+
+//Задание 8: создайте массив той же длины, что исходный. На месте самого большого числа исходного массива в новом вставьте число 1, на месте второго по величине – 2 и так далее.
+
+
+function zad8(){
+    let array1=getRandomArray(len);
+    console.log("Получившийся массив: "+array1);
+    let array2=array1.slice();
+    let counter=1;
+    array1.sort();
+    for(let i=0;i<len;i++){
+        array2[array2.indexOf(array1[len-1-i])]=counter;
+        counter++;
+    }
+    console.log("Итоговый массив: "+array2);
+}
+let len=Number(prompt("Введите длину массива:"));
+zad8();
+
+
+//Задание 9: сделайте сдвиг массива вправо на X позиций (X передайте в функцию в качестве аргумента). Элементы, которые после сдвига "уходят" за пределы его длины, переместите на освободившиеся первые Х позиций.
+
+
+function zad9(shift){
+    let array=getRandomArray(len);
+    console.log("Получившийся массив: "+array);
+    let sub=array.splice(len-shift,shift);
+    array.unshift(sub);
+    console.log("Итоговый массив: "+array);
+}
+let len=Number(prompt("Введите длину массива:"));
+zad9(Number(prompt("Введите желаемый сдвиг элементов массива:")));
+function getRandomArray() {
+    let randarray=[];
+    for(let i=0;i<len;i++){
+        randarray[i]=Math.round(Math.random()*100)/100;
+    }
+    return randarray;
+}
