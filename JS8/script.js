@@ -1,74 +1,74 @@
-// //Практика
+//Практика
 
 
-// /*
-// 1. Напишите функцию counterFactory(start, step), которая при вызове
-// возвращает другую функцию – счётчик tictoc(). start – стартовое
-// значение счётчика, step – его шаг. При каждом вызове tictoc
-// увеличивает значение счётчика на step.
-// */
-// function counterFactory(start, step) {
-//     function tictoc(){
-//         return start+=step;
-//     }
-//     return tictoc;
-// }
-// let tikitoki=counterFactory(Number(prompt("Введите начало:")),Number(prompt("Введите шаг:")));
-// while(prompt("Считаем?", "да")==="да"){
-//     console.log(tikitoki());
-// }
-// /*
-// 2. Напишите функцию take(tictoc, x), которая вызывает функцию
-// tictoc заданное число (x) раз и возвращает массив с результатами
-// вызовов.
-// */
-// function take(tictoc, x){
-//     let arr=[];
-//     for(let i=0;i<x;i++){
-//         arr[i]=tictoc();
-//     }
-//     console.log(arr);
-// }
-// let a=Number(prompt("Введите начало:"));
-// let b=Number(prompt("Введите шаг:"));
-// take(function() {return a+=b;}, Number(prompt("Сколько раз будем вызывать функцию?")));
-// /*
-// 3. Разбейте текст этой задачи на отдельные слова, удаляя по пути
-// точки и запятые, а полученные слова сложите в массив.
-// Напишите функцию, которая возвращает массив из тех же слов,
-// но развёрнутых задом наперёд, причём массив должен быть
-// отсортирован по количеству букв в слове. Напишите другую
-// функцию, которая считает общее количество букв во всех
-// элементах массива.
-// */
-// let arr="Разбейте текст этой задачи на отдельные слова, удаляя по пути точки и запятые, а полученные слова сложите в массив. Напишите функцию, которая возвращает массив из тех же слов, но развёрнутых задом наперёд, причём массив должен быть отсортирован по количеству букв в слове. Напишите другую функцию, которая считает общее количество букв с во всех элементах массива.";
-// arr=arr.split("");
-// arr.forEach(function(elem, index, arr) {
-//     if(elem==","|elem=="."){
-//         arr.splice(index,1);
-//     }
-// });
-// arr=arr.join("").split(" ");
-// arr=reverse(arr);
-// function reverse(array) {
-//     array.reverse();
-//     array.forEach(function(elem,index,array) {
-//         array[index]=elem.split("").reverse().join("");
-//     });
-//     array=array.sort(function(a,b) {
-//         return a.split("").length-b.split("").length;
-//     });
-//     return array;
-// }
-// console.log(arr);
-// function letters(){
-//     let sum=0;
-//     return arr.map(function(elem,index,arr){
-//         sum+=arr[index].length;
-//         return elem=sum;
-//     });
-// }
-// console.log(letters());
+/*
+1. Напишите функцию counterFactory(start, step), которая при вызове
+возвращает другую функцию – счётчик tictoc(). start – стартовое
+значение счётчика, step – его шаг. При каждом вызове tictoc
+увеличивает значение счётчика на step.
+*/
+function counterFactory(start, step) {
+    function tictoc(){
+        return start+=step;
+    }
+    return tictoc;
+}
+let tikitoki=counterFactory(Number(prompt("Введите начало:")),Number(prompt("Введите шаг:")));
+while(prompt("Считаем?", "да")==="да"){
+    console.log(tikitoki());
+}
+/*
+2. Напишите функцию take(tictoc, x), которая вызывает функцию
+tictoc заданное число (x) раз и возвращает массив с результатами
+вызовов.
+*/
+function take(tictoc, x){
+    let arr=[];
+    for(let i=0;i<x;i++){
+        arr[i]=tictoc();
+    }
+    console.log(arr);
+}
+let a=Number(prompt("Введите начало:"));
+let b=Number(prompt("Введите шаг:"));
+take(function() {return a+=b;}, Number(prompt("Сколько раз будем вызывать функцию?")));
+/*
+3. Разбейте текст этой задачи на отдельные слова, удаляя по пути
+точки и запятые, а полученные слова сложите в массив.
+Напишите функцию, которая возвращает массив из тех же слов,
+но развёрнутых задом наперёд, причём массив должен быть
+отсортирован по количеству букв в слове. Напишите другую
+функцию, которая считает общее количество букв во всех
+элементах массива.
+*/
+let arr="Разбейте текст этой задачи на отдельные слова, удаляя по пути точки и запятые, а полученные слова сложите в массив. Напишите функцию, которая возвращает массив из тех же слов, но развёрнутых задом наперёд, причём массив должен быть отсортирован по количеству букв в слове. Напишите другую функцию, которая считает общее количество букв с во всех элементах массива.";
+arr=arr.split("");
+arr.forEach(function(elem, index, arr) {
+    if(elem==","|elem=="."){
+        arr.splice(index,1);
+    }
+});
+arr=arr.join("").split(" ");
+arr=reverse(arr);
+function reverse(array) {
+    array.reverse();
+    array.forEach(function(elem,index,array) {
+        array[index]=elem.split("").reverse().join("");
+    });
+    array=array.sort(function(a,b) {
+        return a.split("").length-b.split("").length;
+    });
+    return array;
+}
+console.log(arr);
+function letters(){
+    let sum=0;
+    return arr.map(function(elem,index,arr){
+        sum+=arr[index].length;
+        return elem=sum;
+    });
+}
+console.log(letters());
 
 
 //ДЗ
