@@ -6,151 +6,152 @@ const teams = [{
 }, {
     "name": "New York Islanders",
     "firstYearOfPlay": 1972,
-    "city": "Uniondale"
+    "city": "Uniondale",
     "state": "New York"
 }, {
     "name": "New York Rangers",
     "firstYearOfPlay": 1926,
-    "city": "New York"
+    "city": "New York",
     "state": "New York"
 }, {
     "name": "Philadelphia Flyers",
     "firstYearOfPlay": 1967,
-    "city": "Philadelphia"
+    "city": "Philadelphia",
     "state": "Pennsylvania"
 }, {
     "name": "Pittsburgh Penguins",
     "firstYearOfPlay": 1967,
-    "city": "Pittsburgh"
+    "city": "Pittsburgh",
     "state": "Pennsylvania"
 }, {
     "name": "Boston Bruins",
     "firstYearOfPlay": 1924,
-    "city": "Boston"
+    "city": "Boston",
     "state": "Massachusetts"
 }, {
     "name": "Buffalo Sabres",
     "firstYearOfPlay": 1970,
-    "city": "Buffalo"
+    "city": "Buffalo",
     "state": "New York"
 }, {
     "name": "Montréal Canadiens",
     "firstYearOfPlay": 1909,
-    "city": "Montréal"
+    "city": "Montréal",
     "state": "Quebec"
 }, {
     "name": "Ottawa Senators",
     "firstYearOfPlay": 1990,
-    "city": "Ottawa"
+    "city": "Ottawa",
     "state": "Ontario"
 }, {
     "name": "Toronto Maple Leafs",
     "firstYearOfPlay": 1917,
-    "city": "Toronto"
+    "city": "Toronto",
     "state": "Ontario"
 }, {
     "name": "Carolina Hurricanes",
     "firstYearOfPlay": 1979,
-    "city": "Raleigh"
+    "city": "Raleigh",
     "state": "North Carolina"
 }, {
     "name": "Florida Panthers",
     "firstYearOfPlay": 1993,
-    "city": "Sunrise"
+    "city": "Sunrise",
     "state": "Florida"
 }, {
     "name": "Tampa Bay Lightning",
     "firstYearOfPlay": 1991,
-    "city": "Tampa"
+    "city": "Tampa",
     "state": "Florida"
 }, {
     "name": "Washington Capitals",
     "firstYearOfPlay": 1974,
-    "city": "Washington"
+    "city": "Washington",
     "state": "District of Columbia"
 }, {
     "name": "Chicago Blackhawks",
     "firstYearOfPlay": 1926,
-    "city": "Chicago"
+    "city": "Chicago",
     "state": "Illinois"
 }, {
     "name": "Detroit Red Wings",
     "firstYearOfPlay": 1926,
-    "city": "Detroit"
+    "city": "Detroit",
     "state": "Michigan"
 }, {
     "name": "Nashville Predators",
     "firstYearOfPlay": 1997,
-    "city": "Nashville"
+    "city": "Nashville",
     "state": "Tennessee"
 }, {
     "name": "St. Louis Blues",
     "firstYearOfPlay": 1967,
-    "city": "St. Louis"
+    "city": "St. Louis",
     "state": "Missouri"
 }, {
     "name": "Calgary Flames",
     "firstYearOfPlay": 1980,
-    "city": "Calgary"
+    "city": "Calgary",
     "state": "Alberta"
 }, {
     "name": "Colorado Avalanche",
     "firstYearOfPlay": 1979,
-    "city": "Denver"
+    "city": "Denver",
     "state": "Colorado"
 }, {
     "name": "Edmonton Oilers",
     "firstYearOfPlay": 1979,
-    "city": "Edmonton"
+    "city": "Edmonton",
     "state": "Alberta"
 }, {
     "name": "Vancouver Canucks",
     "firstYearOfPlay": 1970,
-    "city": "Vancouver"
+    "city": "Vancouver",
     "state": "British Columbia"
 }, {
     "name": "Anaheim Ducks",
     "firstYearOfPlay": 1993,
-    "city": "Anaheim"
+    "city": "Anaheim",
     "state": "California"
 }, {
     "name": "Dallas Stars",
     "firstYearOfPlay": 1967,
-    "city": "Dallas"
+    "city": "Dallas",
     "state": "Texas"
 }, {
     "name": "Los Angeles Kings",
     "firstYearOfPlay": 1967,
-    "city": "Los Angeles"
+    "city": "Los Angeles",
     "state": "California"
 }, {
     "name": "San Jose Sharks",
     "firstYearOfPlay": 1990,
-    "city": "San Jose"
+    "city": "San Jose",
     "state": "California"
 }, {
     "name": "Columbus Blue Jackets",
     "firstYearOfPlay": 1997,
-    "city": "Columbus"
+    "city": "Columbus",
     "state": "Ohio"
 }, {
     "name": "Minnesota Wild",
     "firstYearOfPlay": 1997,
-    "city": "Saint Paul"
+    "city": "Saint Paul",
     "state": "Minnesota"
 }, {
     "name": "Winnipeg Jets",
     "firstYearOfPlay": 2011,
-    "city": "Winnipeg"
+    "city": "Winnipeg",
     "state": "Manitoba"
 }, {
     "name": "Arizona Coyotes",
     "firstYearOfPlay": 1979,
-    "city": "Glendale"
+    "city": "Glendale",
     "state": "Arizona"
 }, {
     "name": "Vegas Golden Knights",
     "firstYearOfPlay": 2016,
-    "city": "Paradise"
+    "city": "Paradise",
     "state": "Nevada"
 }]
+export default teams; 

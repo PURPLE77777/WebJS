@@ -79,15 +79,36 @@ console.log(letters());
 Подсчитайте количество таких символов во всех элементах массива, как в задаче 3 из практики.
 При подсчёте прописные и строчные буквы считайте одинаковыми.
 */
-
+function letter(array, symbol){
+    symbol=symbol.toLowerCase();
+    array=array.toLowerCase().split("");
+    let count=0;
+    array.forEach(function(elem){
+        if(elem==symbol) count++;
+    });
+    console.log("Кол-во символов \'"+symbol+"\' в массиве: "+count);
+}
+letter(arr,prompt("Введите искомый символ:"));
 /*
 2. Напишите функцию, которая будет возвращать частичную функцию от функции из задачи 1, 
 фиксируя искомый символ. Например:
-
 let countOfE = letterCounter('e');
 console.log(countOfD(["abcde", "eerie", "MBE"])); // 5
 */
-
+function letter(symbol){
+    function counter(array){
+        symbol=symbol.toLowerCase();
+        array=array.toLowerCase().split("");
+        let count=0;
+        array.forEach(function(elem){
+            if(elem==symbol) count++;
+        });
+        console.log("Кол-во символов \'"+symbol+"\' в массиве: "+count);
+    }
+    return counter;
+}
+let smbl=letter(prompt("Введите искомый символ:"));
+console.log(smbl(prompt("Введите строку, в которой будем искать этот введённый символ")));
 /*
 3. Отфильтруйте массив городов так, чтобы в нём остались только города из штата Техас, 
 которые с 2000 по 2013 выросли в населении.
@@ -108,13 +129,14 @@ console.log("Всего "+data.reduce(function(sum,elem){
 5. Создайте массив только из тех городов, которые начинаются на букву S, 
 при этом отсортируйте элементы этого массива по названию штата.
 */
-let ind=-1;
-let arrNew=[];
 let citiesSort=data.filter(function(elem,index,arr){
     if(elem.city[0]==="S") {
-        ind++;
-        return arrNew[ind]=arr[index];
+        return true;
     }
+}).sort(function(a,b){
+    if(a.state>b.state) return 1;
+    else if(a.state<b.state) return -1;
+    else return 0;
 });
 console.log(citiesSort);
 /*
@@ -123,26 +145,22 @@ console.log(citiesSort);
 -значение каждого свойства – массив городов;
 -каждый элемент массива – название города, население и место в общем рейтинге (rank).
 */
-let cities={};
-let citiesArr=[];
-ind=0;
-let states=data.filter(function(elem){
-    data.filter(function(item){
-        if(elem.state==item.state){
-            if(elem.state in cities===false){ 
-                cities.state=elem.state;
-                cities.state[elem.state]=citiesArr;
+let ind;
+let states={};
+data.forEach(function(elem){
+    ind=-1;
+    if(!(elem.state in states))
+        data.forEach(function(item){
+            if(elem.state===item.state){
+                ind++;
+                if(!(elem.state in states)) states[elem.state]=[]; 
+                states[elem.state][ind]={
+                    "city": item.city,
+                    "population": item.population,
+                    "rank": item.rank
+                }
             }
-            cities.state[elem.state].citiesArr[ind]={"city":item.city,
-                                                    "population":item.population,
-                                                    "rank":item.rank
-
-            };
-            ind++;
-        }
-        return cities.state[elem.state].citiesArr[ind];
-    });
-    return cities.state[elem.state];
+        });
 });
 console.log(states);
 /*
@@ -151,3 +169,19 @@ console.log(states);
 -каждый объект включает название города, название штата, название клуба и год его основания;
 -если в городе есть несколько клубов, создайте отдельные объекты для каждого из них.
 */
+import teams from "./nhl.js";
+let clubs=[];
+let ind;
+data.forEach(function(elem){
+    ind=0;
+    teams.forEach(function(item){
+        clubs[ind]={
+            "city": item.city,
+            "state": elem.state,
+            "name": item.name,
+            "firstYearOfPlay": item.firstYearOfPlay
+        }
+        ind++;
+    });
+});
+console.log(clubs);
