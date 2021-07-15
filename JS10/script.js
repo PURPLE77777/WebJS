@@ -68,7 +68,9 @@ div.addEventListener("mousedown", evnt);
 */
 let numbers=["0","1","2","3","4","5","6","7","8","9",];
 function nmbrs(evnt){
-    if(evnt.key!=numbers[evnt.key]) input.value="";
+    if(evnt.key!=numbers[evnt.key]) {
+        evnt.preventDefault();
+    }
 }
 input.addEventListener("keydown",nmbrs);
 /*
