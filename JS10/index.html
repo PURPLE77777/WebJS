@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .button{
+            margin: 10px;
+        }
+        .div{
+            position: absolute;
+            height: 100px;
+            width: 170px;
+            cursor: pointer;
+            background-color: green;
+            left: calc(20% - 85px);
+            top: calc(20% - 50px);
+        }
+        .papka{
+            margin: 0px auto;
+            height: 128px;
+            width: 128px;
+            background-image: url(http://s1.iconbird.com/ico/2013/7/390/w256h2561372777066FolderClose.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer;
+        }
+        h4{
+            margin: 0px;
+        }
+        .container{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-image: url(https://w-dog.ru/wallpapers/9/12/495916054343548/more-plyazh-zakat-sirenevyj.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <button>Погнали!</button>
+    <form style="margin: 10px; text-align: center;">
+        <label>
+            <input type="text" style="margin: 5px;">
+        </label>
+        <div>
+            <input type="button" value="enable" name="button" class="button">
+            <input type="button" value="disable" name="button" class="button">
+        </div>
+    </form>
+    <div class="div">
+        <div style="background-color: yellow; width: 65px; height: auto">
+            <h4>Output</h4>
+            <div>X:
+                <span class="coordX"></span>
+            </div>
+            <div>Y:
+                <span class="coordY"></span>
+            </div>
+        </div>
+    </div>
+    <div class="papka"></div>
+    <div class="container"></div>
+    <script src="/JS10/script.js"></script>
+</body>
