@@ -112,7 +112,7 @@ let dvs;
 for(let i=0;i<blocks;i++){
     dvs=document.createElement("div")
     dvs.classList.add("block");
-    dvs.style.transition=".3s all 0s";
+    dvs.style.transition=".2s all 0s";
     dvs.style.width="50px";
     dvs.style.height="50px";
     dvs.style.margin="5px";
