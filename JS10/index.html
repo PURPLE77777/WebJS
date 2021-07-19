@@ -42,6 +42,48 @@
             background-repeat: no-repeat;
             background-position: center;
         }
+        .block{
+            transition: .2s all 0s;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            background-color: white;
+        }
+        .div-clons{
+            margin: 20px;
+        }
+        .but{
+            display: block;
+            margin: 10px auto;
+        }
+        .inpt{
+            display: block;
+            margin: 10px auto;
+        }
+        table{
+            width: 300px;
+            height: 400px;
+            border: 2px black solid;
+            margin: 0px auto;
+        }
+        .bordered{
+            border: 1px solid black;
+        }
+        .striped{
+            background-color: yellow;
+        }
+        .highlight:hover{
+            color: orangered;
+        }
+        .pic-change{
+            margin: 20px auto;
+            height: 128px;
+            width: 128px;
+            background-image: url(https://sun1-98.userapi.com/s/v1/ig1/Puq0pKXyCfjFrdPthbNqIj-8AY9xJGl3ANQ-_3uX2veWFllIEga49vIi7TX6dcPUt5UujRv1.jpg?size=400x0&quality=96&crop=70,0,699,699&ava=1);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }   
     </style>
 </head>
 <body>
@@ -68,5 +110,45 @@
     </div>
     <div class="papka"></div>
     <div class="container"></div>
+    <div class="div-clons">
+        <input type="text" class="inpt">
+        <button class="but">Ещё</button>
+    </div>
+    <table cellspacing="0" cellpadding="10">
+        <tbody>
+            <tr>
+                <td colspan="2">11</td>
+                <td colspan="2">12</td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>22</td>
+                <td>23</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>32</td>
+                <td>33</td>
+                <td>34</td>
+            </tr>
+            <tr>
+                <td>41</td>
+                <td colspan="3">42</td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="radio" name="radiobuttom" class="radio-btm">bordered
+    <input type="radio" name="radiobuttom" class="radio-btm">striped
+    <input type="radio" name="radiobuttom" class="radio-btm">highlight
+    <div class="div-deleg">
+        <div class="child">Blog</div>
+        <p class="child">Paragraph</p>
+        <button class="child">Button</button>
+        <a class="child" href="#">Link</a>
+        <span class="child">Span</span>
+    </div>
+    <p style="background-color: yellowgreen; display: block; margin: 20px auto; width: 150px;">Довольны своей ЗП?</p>
+    <div class="pic-change"></div>
     <script src="/JS10/script.js"></script>
 </body>

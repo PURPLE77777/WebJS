@@ -108,17 +108,12 @@ ppk.addEventListener("dblclick", papka);
 function generateColor() {
     return '#' + Math.floor(Math.random()*16777215).toString(16);
   }
-let blocks=Number(prompt("Сколько блоков будем делать?", 400));
+let blocks=Number(prompt("Сколько блоков будем делать?", 100));
 let cntnr=document.getElementsByClassName("container")[0];
 let dvs;
 for(let i=0;i<blocks;i++){
     dvs=document.createElement("div")
     dvs.classList.add("block");
-    dvs.style.transition=".2s all 0s";
-    dvs.style.width="50px";
-    dvs.style.height="50px";
-    dvs.style.margin="5px";
-    dvs.style.backgroundColor="white";
     dvs.style.backgroundColor=generateColor();
     cntnr.append(dvs);
 }
@@ -132,3 +127,120 @@ function bordRadNo(event){
 }
 cntnr.addEventListener("mouseover", bordRad);
 cntnr.addEventListener("mouseout", bordRadNo);
+
+
+//ДЗ
+
+
+/*
+1. Дан инпут. Дана кнопка. По нажатию на кнопку клонируйте инпут.
+*/
+let baton=document.getElementsByClassName("but")[0];
+baton.addEventListener("click",function(){
+    let inpt=document.createElement("input");
+    inpt.classList.add("inpt");
+    baton.before(inpt);
+});
+/*
+2. Добавьте на страницу таблицу в стандартном оформлении. 
+Создайте три класса для этой таблицы: bordered (с границами вокруг всех ячеек),
+striped (разные цвета для чётных и нечётных строк), highlight (оформление стандартное, 
+но при наведении на ячейку текст в ней меняет цвет). При первом клике на таблице 
+добавьте ей класс bordered, при втором клике удалите класс bordered и добавьте класс 
+striped, при третьем клике удалите класс striped и добавьте класс highlight. Четвёртый 
+и последующие клики запускают «карусель классов» по второму кругу.
+*/
+let table=document.getElementsByTagName("table")[0];
+let tr=document.getElementsByTagName("tr");
+let td=document.getElementsByTagName("td");
+function fourthClick(){
+    for(let i=0;i<td.length;i++){
+        td[i].classList.remove("highlight");
+    }
+    table.removeEventListener("click",fourthClick);
+    table.addEventListener("click",firstClick);
+}
+function thirdClick(){
+    for(let i=0;i<tr.length;i++){
+        if((i+1)%2==0) tr[i].classList.remove("striped");
+    }
+    for(let i=0;i<td.length;i++){
+        td[i].classList.add("highlight");
+    }
+    table.removeEventListener("click",thirdClick);
+    table.addEventListener("click",fourthClick);
+}
+function secondClick(){
+    for(let i=0;i<td.length;i++){
+        td[i].classList.remove("bordered");
+    }
+    for(let i=0;i<tr.length;i++){
+        if((i+1)%2==0) tr[i].classList.add("striped");
+    }
+    table.removeEventListener("click",secondClick);
+    table.addEventListener("click",thirdClick);
+}
+function firstClick(){
+    for(let i=0;i<td.length;i++){
+        td[i].classList.add("bordered");
+    }
+    table.removeEventListener("click",firstClick);
+    table.addEventListener("click",secondClick);
+}
+table.addEventListener("click",firstClick);
+/*
+3. Модифицируйте задачу 2. Добавьте три radiobutton. При выборе первой включайте класс 
+bordered, при выборе второй — striped, при выборе третьей — highlight. При включении 
+каждого класса выключайте остальные два.
+*/
+let inputs=document.getElementsByClassName("radio-btm");
+function highlight(){
+    for(let i=0;i<tr.length;i++){
+        if((i+1)%2==0) tr[i].classList.remove("striped");
+    }
+    for(let i=0;i<td.length;i++){
+        td[i].classList.remove("bordered");
+        td[i].classList.add("highlight");
+    }
+}
+function striped(){
+    for(let i=0;i<td.length;i++){
+        td[i].classList.remove("bordered");
+        td[i].classList.remove("highlight");
+    }
+    for(let i=0;i<tr.length;i++){
+        if((i+1)%2==0) tr[i].classList.add("striped");
+    }
+}
+function bordered(){
+    for(let i=0;i<tr.length;i++){
+        if((i+1)%2==0) tr[i].classList.remove("striped");
+    }
+    for(let i=0;i<td.length;i++){
+        td[i].classList.remove("highlight");
+        td[i].classList.add("bordered");
+    }
+}
+inputs[0].addEventListener("click",bordered);
+inputs[1].addEventListener("click",striped);
+inputs[2].addEventListener("click",highlight);
+/*
+4. Создайте пять элементов разных типов (например, div, p, button, a, span). Используя 
+приём делегирования, по клику на элемент выводите информацию о его типе.
+*/
+let parent=document.getElementsByClassName("div-deleg")[0];
+parent.addEventListener("click", function(e){
+    console.log(e.target);
+});
+/*
+5. Добавьте в html код изображение. Добавьте скрипт, который будет выполнять следующие 
+действия: при наведении мыши на картинку изображение заменяется другим, при выходе мыши 
+за пределы изображения восстанавливается первоначальное изображение.
+*/
+let pic=document.getElementsByClassName("pic-change")[0];
+pic.addEventListener("mouseover",function(){
+    pic.style.backgroundImage="url(https://yt3.ggpht.com/ytc/AAUvwnjzUcmV2rjJrzyXQYeqBHwdIJTncl-SGtt0mg=s900-c-k-c0x00ffffff-no-rj)";
+});
+pic.addEventListener("mouseout",function(){
+    pic.style.backgroundImage="url(https://sun1-98.userapi.com/s/v1/ig1/Puq0pKXyCfjFrdPthbNqIj-8AY9xJGl3ANQ-_3uX2veWFllIEga49vIi7TX6dcPUt5UujRv1.jpg?size=400x0&quality=96&crop=70,0,699,699&ava=1)";
+});
