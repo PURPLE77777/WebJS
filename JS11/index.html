@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .diagram{
+            display: flex;
+            align-items: flex-end;
+            height: 150px;
+            margin: 20px 0px;
+            flex-wrap: nowrap;
+            transition: .3s all 0s;
+        }
+        .div-was,.div-will{
+            margin: 10px 10px;
+            width: 50px;
+            height: 0px;
+        }
+        .div-was{
+            background-color: red;
+        }
+        .div-will{
+            background-color: green;
+        }
+        input{
+            margin: 0px 0px 0px 10px;
+        }
+        .outs{
+            display: flex;
+            margin-left: 16px;
+        }
+    </style>
+</head>
+<body>
+    <select class="selec">
+        <option value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+    </select>
+    <form>Калькулятор процентов из расчёта 12% годовых.
+        <p>Сумма<input class="sum" type="text" value="1000"></p>
+        <p>Срок в месяцах<input class="month" type="number" value="12"></p>
+        <p>С капитализацией<input type="checkbox"></p>
+        <div class="outs">
+            <div style="text-align: center;">
+                <b>Было:<p style="margin: 0px;"><output class="was"></output></p></b>
+            </div>
+            <div style="margin-left: 16px; text-align: center;">
+                <b>Станет:<p style="margin: 0px;"><output class="will"></output></p></b>
+            </div>
+        </div>
+    </form>
+    <div class="diagram">
+        <div class="div-was"></div>
+        <div class="div-will"></div>
+    </div>
+    <form>
+        <input placeholder="Введите пароль...">
+        <input type="button" value="Отправить">
+    </form>
+    <script src="../JS11/scripts.js"></script>
+</body>
+</html>

@@ -66,7 +66,7 @@ div.addEventListener("mousedown", evnt);
 5. Создайте поле ввода, сделайте с помощью JS так, чтобы в него можно было вводить
 только числовые значения.
 */
-let numbers=["0","1","2","3","4","5","6","7","8","9",];
+let numbers=["0","1","2","3","4","5","6","7","8","9"];
 function nmbrs(evnt){
     if(evnt.key!=numbers[evnt.key]) {
         evnt.preventDefault();
@@ -108,7 +108,7 @@ ppk.addEventListener("dblclick", papka);
 function generateColor() {
     return '#' + Math.floor(Math.random()*16777215).toString(16);
   }
-let blocks=Number(prompt("Сколько блоков будем делать?", 100));
+let blocks=Number(prompt("Сколько блоков будем делать?", 300));
 let cntnr=document.getElementsByClassName("container")[0];
 let dvs;
 for(let i=0;i<blocks;i++){
