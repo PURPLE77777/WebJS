@@ -30,6 +30,54 @@
             display: flex;
             margin-left: 16px;
         }
+        .form-registration {
+            margin: 10px auto;
+            width: 70%;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border-width: 0;
+            border-bottom: 3px solid rgba(69, 160, 73);
+            box-sizing: border-box;
+        }
+        .form-input_type-submit {
+            background-color: rgba(69, 160, 73);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .form-input_type-submit:hover {
+            background-color: rgba(69, 160, 73, .7);
+        }
+        .email-incorrect, .tel-incorrect, .password-incorrect{
+            position: absolute;
+            background-color: orange;
+            right: 16%;
+            padding: 5px;
+            display: none;
+        }
+        .email-incorrect::before, .tel-incorrect::before, .password-incorrect::before{
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: -21px;
+            border-bottom: 14px solid transparent;
+            border-right: 21px solid orange;
+            border-top: 14px solid transparent;
+        }
+        .email-incorrect{
+            top: 41px;
+        }
+        .tel-incorrect{
+            top: 118px;
+        }
+        .password-incorrect{
+            top: 194px;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +107,24 @@
         <input placeholder="Введите пароль...">
         <input type="button" value="Отправить">
     </form>
+    <form class="form-registration" action="/action_page.php">
+        <label for="email">E-mail
+            <div class="email-incorrect">Введите поле корректно!</div>
+            <input class="form-input" type="email" id="email" name="email" placeholder="some@email.com" required>
+        </label>
+
+        <label for="tel">Телефон
+            <input class="form-input" type="tel" id="tel" name="tel" placeholder="Ваш телефон..." required>
+            <div class="tel-incorrect">Введите поле корректно!</div>
+        </label>
+
+        <label for="password">Пароль
+            <input class="form-input" type="password" id="password" name="password" placeholder="Ваш пароль..." required>
+            <div class="password-incorrect">Введите поле корректно!</div>
+        </label>
+        
+        <input class="form-input form-input_type-submit" type="button" value="Зарегистрироваться">
+    </form>    
     <script src="../JS11/scripts.js"></script>
 </body>
 </html>

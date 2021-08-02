@@ -18,29 +18,29 @@ console.log(prak3);
 
 //4. Форму с именем search, без использования её позиции в документе.
 //решение 1
-// let elem=document.getElementsByName("search");
-// let prak4;
-// for(let i=0;i<elem.length;i++){
-//     if(elem[i].tagName=="FORM") prak4=elem[i];
-// }
-// console.log(prak4);
-// //решение 2
-// let form=document.getElementsByTagName("form");
-// let prak4;
-// for(let i=0;i<form.length;i++){
-//     if(form[i].name=="search") prak4=form[i];
-// }
-// console.log(prak4);
+let elem=document.getElementsByName("search");
+let prak4;
+for(let i=0;i<elem.length;i++){
+    if(elem[i].tagName=="FORM") prak4=elem[i];
+}
+console.log(prak4);
+//решение 2
+let form=document.getElementsByTagName("form");
+let prak4;
+for(let i=0;i<form.length;i++){
+    if(form[i].name=="search") prak4=form[i];
+}
+console.log(prak4);
 
 
 //5. Элемент input в форме с именем search. Если их несколько, то нужен
 //первый.
-// let elem=document.getElementsByName("search");
-// let prak5;
-// for(let i=0;i<elem.length;i++){
-//     if(elem[i].tagName=="INPUT") prak5=elem[i];
-// }
-// console.log(prak5);
+let elem=document.getElementsByName("search");
+let prak5;
+for(let i=0;i<elem.length;i++){
+    if(elem[i].tagName=="INPUT") prak5=elem[i];
+}
+console.log(prak5);
 
 
 //6. Элемент с именем info[0], без точного знания его позиции в документе.

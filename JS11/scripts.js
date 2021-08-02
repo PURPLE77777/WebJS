@@ -64,3 +64,65 @@ btn.addEventListener("click",function(){
     if(reg.test(str)) alert("Добро пожаловать!");
     else alert("Ой, что-то пошло не так :(\nПроверьте корректность набранного пароля");
 });
+
+
+//ДЗ
+
+
+/*
+1. Напишите функцию, которая получает любую форму в качестве аргумента и проверяет 
+введённые в форму данные (в input типа email должен быть введён email, в input 
+type="tel" — белорусский номер телефона; пароль должен содержать не менее восьми символов, 
+среди которых есть одна маленькая, одна большая буква, одна цифра и один спецсимвол; 
+самостоятельно добавьте ещё хотя бы две логичные проверки). Все проверки проводить с 
+помощью регулярных выражений. При возникновении ошибок выдавать их пользователю рядом с 
+проверенными полями! Если форма заполнена верно — выдайте приветственное сообщение
+*/
+function formCheck(form){
+    let btn=form[3];
+    btn.addEventListener("click", check);
+    function check(){
+        let regexpEmail=/.+@.+\..+/;
+        let regexpTel=/^((\+|)375([\s\-]|)|80([\s\-]|))(\(|)(29|25|44|33)(\)|)(|\s|\-|)\d{3}(\s|\-|)\d{2}(\s|\-|)\d{2}$/;
+        let regexpPass=/(?=.*[0-9])(?=.*\W)(?=.*[a-z])(?=.*[A-Z])[\w\W]{8,}/;
+        let email=form[0].value;
+        let tel=form[1].value;
+        let pass=form[2].value;
+        let errorEmail=document.getElementsByClassName("email-incorrect")[0];
+        let errorTel=document.getElementsByClassName("tel-incorrect")[0];
+        let errorPass=document.getElementsByClassName("password-incorrect")[0];
+        let styleErrorEmail=getComputedStyle(errorEmail);
+        let styleErrorTel=getComputedStyle(errorTel);
+        let styleErrorPass=getComputedStyle(errorPass);
+        if(styleErrorEmail.display=="block") errorEmail.style.display="none";
+        if(!regexpEmail.test(email)) errorEmail.style.display="block";
+        if(styleErrorTel.display=="block") errorTel.style.display="none";
+        if(!regexpTel.test(tel)) errorTel.style.display="block";
+        if(styleErrorPass.display=="block") errorPass.style.display="none";
+        if(!regexpPass.test(pass)) errorPass.style.display="block";
+        else alert("Добро пожаловать!");
+    }
+}
+formCheck(document.getElementsByClassName("form-registration")[0]);
+/*
+2. Используя регулярные выражения, напишите скрипт, который заменяет слово «функция» в 
+тексте на «function». Если получится, сделайте так, чтобы «функция» заменялась в любом 
+падеже.
+*/
+regexp=/[Фф]ункц(ия|ии|ией|иональный|иональная)/g;
+str="Функция — отношение между элементами, при котором изменение в одном элементе влечёт изменение в другом. Функция в философии — обязанность, круг деятельности. Функция — работа, производимая органом, организмом, прибором; роль, значение чего-либо; назначение чего-либо. Функция — назначение персонажа в литературном произведении. Социальная функция — использование того или иного механизма социальных взаимодействий для достижения определённой цели или реализации определённых ценностей. Функции в математике — закон зависимости одной величины от другой. Функциональная зависимость в теории реляционных баз данных — отношение между атрибутами, характеризующее семантические ограничения хранимых данных. Функция в программировании — фрагмент программного кода, к которому можно обратиться из другого места программы.";
+console.log(str.replace(regexp,"function"));
+/*
+3. С помощью регулярных выражений определите, является ли строка корректным временем вида 
+'09.59 am', '12.30 pm'.
+*/
+regexp=/(0[0-9]|1[0-1])(\.|:|-)(0[0-9]|[0-5][0-9]|00)(\s|)(am|AM|a.m.|A.M.|pm|PM|p.m.|P.M.)|12(\.|:|-)00(\s|)(am|AM|a.m.|A.M.|pm|PM|p.m.|P.M.)/g;
+str="09.59 am 12.30 pm 09-59 pm 12:30 am 00:00 am 12:00 am 0:00PM 1121110.54 am";
+console.log(str.match(regexp));
+/*
+4. Удалите одной регуляркой все повторяющиеся слова из строки, например для 
+'dsf xxx aaa xxx sd aaa' должно вернуть 'dsf xxx aaa sd'.
+*/
+str='dsf xxx aaa xxx sd aaa';
+regexp=/([a-zA-Zа-яА-ЯёЁ]+)(?!.*\1)/g;
+console.log(str.match(regexp));

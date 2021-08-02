@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        .divchick{
+            position: relative;
+            top: 20px;
+            left: calc(50% - 200px);
+            width: 400px;
+            height: 400px;
+            border: 2px solid;
+        }
+        .outs{
+            margin-top: 30px;
+            text-align: center;
+        }
+        .scroll{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            background-color: brown;
+            height: 5px;
+            width: 0px;
+        }
+        .div-big{
+            height: 2000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll"></div>
+    <form>
+        <div class="divchick"></div>
+        <div class="outs">
+            X:<output name="outX"></output>
+            Y:<output name="outY"></output>
+        </div>
+    </form>
+    <div class="div-big"></div>
+    <script src="script.js"></script>
+</body>
+</html>

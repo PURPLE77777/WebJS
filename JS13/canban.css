@@ -1,0 +1,73 @@
+body{
+    margin: 0px;
+    background-color: coral;
+    user-select: none;
+    text-align: center;
+}
+.block{
+    margin: 30px;
+}
+.task{
+    display: inline-block;
+    width: 30%;
+    background-color: #000000b3;
+    text-align: center;
+    vertical-align: top;
+    margin: 0px 10px;
+}
+.head{
+    color: white;
+    text-align: center;
+    background-color: #1d8dae;
+    padding-top: 10px;
+}
+.btn, .btn_edit{
+    width: 100%;
+    background-color: royalblue;
+    color: white;
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 5px 0px;
+    box-shadow: 20px 0 20px -20px #000 inset, -20px 0 20px -20px #000 inset;
+}
+.btn_edit{
+    margin: 0px;
+}
+.add-task{
+    display: none;
+    background-color: rgb(58, 139, 58);
+    margin-top: 10px;
+}
+.add-task_input{
+    margin: 5px;
+    width: 80%;
+}
+.add-task_textarea{
+    resize: none;
+    margin: 5px;
+    width: 80%;
+    height: 90px;
+    overflow: hidden;
+}
+.deal{
+    background-color: aquamarine;
+    margin: 15px;
+    transition: .2s all 0s;
+}
+.deal:hover{
+    cursor: move;
+    box-shadow: 0 0 10px 10px rgb(224, 240, 3);
+}
+p{
+    margin: 0px;
+    padding: 10px 0px;
+    font-weight: bold;
+    background-color: chartreuse;
+}
+span{
+    display: block;
+    padding: 15px;
+}
+.dragover{
+    box-shadow: 0px 0px 10px 10px yellow;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="canban.css">
+</head>
+<body>
+    <div class="block">
+        <div class="task container-new">
+            <div class="head">
+                Задачи в ожидании
+                <button class="btn">Добавить новую задачу</button>
+                <div class="add-task">
+                    <input class="add-task_input" type="text" placeholder="Тема задачи">
+                    <textarea class="add-task_textarea" maxlength="150" placeholder="Описание задачи (150 символов)"></textarea>
+                    <button class="btn_edit">Добавить задачу</button>
+                </div>
+            </div>
+            <div class="block_tasks"></div>
+        </div>
+        <div class="task container-progress">
+            <div class="head">
+                Задачи в процессе
+                <button class="btn">Править задачу</button>
+                <div class="add-task">
+                    <input class="add-task_input" type="number" placeholder="Номер задачи">
+                    <input class="add-task_input" type="text" placeholder="Тема задачи">
+                    <textarea class="add-task_textarea" maxlength="150" placeholder="Описание задачи (150 символов)"></textarea>
+                    <button class="btn_edit">Править задачу</button>
+                </div>
+            </div>
+            <div class="block_tasks"></div>
+        </div>
+        <div class="task container-finish">
+            <div class="head">
+                Задачи выполнены
+                <button class="btn">Удалить задачу</button>
+                <div class="add-task">
+                    <input class="add-task_input" type="number" placeholder="Номер задачи">
+                    <button class="btn_edit">Удалить задачу</button>
+                </div>
+            </div>
+            <div class="block_tasks"></div>
+        </div>
+    </div>
+    <script src="canban.js"></script>
+</body>
+</html>
