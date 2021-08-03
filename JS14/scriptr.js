@@ -56,7 +56,29 @@ strMy.ucWords(prompt("Введите строку:","Эти слова не пр
 того, класс будет иметь следующие методы: метод isDomain для проверки домена,
 метод isDate для проверки даты и метод isPhone для проверки телефона.
 */
-
+function Validator(){
+    this.isEmail=function(email){
+        let regexp=;
+        console.log(email.match(regexp));
+    }
+    this.isDomain=function(doman){
+        let regexp=;
+        console.log(doman.match(regexp));
+    }
+    this.isDate=function(date){
+        let regexp=;
+        console.log(date.match(regexp));
+    }
+    this.isPhone=function(tel){
+        let regexp=;
+        console.log(tel.match(regexp));
+    }
+}
+let userInfo=new Validator();
+userInfo.isEmail(prompt("Введите ваш email: ","fdsf.sd@fdaf.vrf"));
+userInfo.isDomain(prompt("Введите ваш домен: ","https://yandex.by/"));
+userInfo.isDate(prompt("Введите дату: ","19-03-2007"));
+userInfo.isPhone(prompt("Введите ваш телефон: ","+375444617326"));
 /*
 4. Реализуйте класс Worker (Работник), который будет иметь следующие
 свойства: name (имя), surname (фамилия), rate (ставка за день работы), days
