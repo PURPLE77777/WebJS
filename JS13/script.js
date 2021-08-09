@@ -18,7 +18,13 @@ div.addEventListener("mousemove",function(e){
 2. Реализуйте в верхней части страницы «полоску прогресса», которая
 будет показывать, на какой процент проскроллена страница.
 */
+let scrollHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
 let scroll=document.getElementsByClassName("scroll")[0];
+console.log(scrollHeight-document.documentElement.clientHeight);
 window.addEventListener("scroll",function(){
-    scroll.style.width=window.pageYOffset/1809.3333740234375*100+"%";
+    scroll.style.width=Math.round(window.pageYOffset/(scrollHeight-document.documentElement.clientHeight)*100)+"%";
 });

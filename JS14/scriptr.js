@@ -58,26 +58,26 @@ strMy.ucWords(prompt("Введите строку:","Эти слова не пр
 */
 function Validator(){
     this.isEmail=function(email){
-        let regexp=;
-        console.log(email.match(regexp));
+        let regexp=/.+@.+\..+/;
+        console.log(regexp.test(email));
     }
     this.isDomain=function(doman){
-        let regexp=;
-        console.log(doman.match(regexp));
+        let regexp=/(https|http):\/\/.+\..+/;
+        console.log(regexp.test(doman));
     }
     this.isDate=function(date){
-        let regexp=;
-        console.log(date.match(regexp));
+        let regexp=/([0-2][0-9]|3[0-1](?!-02))-(0[1-9]|1[0-2])-\d{4}/g;
+        console.log(regexp.test(date));
     }
     this.isPhone=function(tel){
-        let regexp=;
-        console.log(tel.match(regexp));
+        let regexp=/((\+|)375([\s\-]|)|80([\s\-]|))(\(|)(29|25|44|33)(\)|)(|\s|\-|)\d{3}(\s|\-|)\d{2}(\s|\-|)\d{2}/;
+        console.log(regexp.test(tel));
     }
 }
 let userInfo=new Validator();
 userInfo.isEmail(prompt("Введите ваш email: ","fdsf.sd@fdaf.vrf"));
 userInfo.isDomain(prompt("Введите ваш домен: ","https://yandex.by/"));
-userInfo.isDate(prompt("Введите дату: ","19-03-2007"));
+userInfo.isDate(prompt("Введите дату в стиле дд--мм-гггг: ","19-03-2007"));
 userInfo.isPhone(prompt("Введите ваш телефон: ","+375444617326"));
 /*
 4. Реализуйте класс Worker (Работник), который будет иметь следующие
@@ -87,7 +87,19 @@ getSalary(), который будет выводить зарплату раб�
 произведение (умножение) ставки rate на количество отработанных дней
 days.
 */
-
+class Worker{  
+    constructor(name, surname, days, rate){
+        this.name=name;
+        this.surname=surname;
+        this.days=days;
+        this.rate=rate;
+    }
+    getSalary(){
+        console.log(`Зарплата ${this.name} ${this.surname} за ${this.days} дней: `+this.rate*this.days+" рублей");
+    }
+}
+let Pasha=new Worker(prompt("Имя работника:","Павел"),prompt("Фамилия работника:","Стефанович"),Number(prompt("Количество отработанный дней работником:",30)),Number(prompt("ставка рабочего:",60)));
+Pasha.getSalary();
 /*
 5. Реализуйте класс User принимающий объект со свойствами name
 и password, предусмотрите метод login, возвращающее значение true
@@ -97,3 +109,38 @@ days.
 возможность смены имени, а также при логине в консоль выводилось
 сообщение о том, что админ залогинен.
 */
+class User{
+    constructor(name, password){
+        this.name=name;
+        this.password=password;
+    }
+    check(name,password){
+        if(this.name==name&this.password==password) console.log(`Welcome, ${this.name}!`);
+        else console.log("Error of initialization!");
+    }
+    changeName(answer){
+        if("yes"==answer){
+            this.name=prompt("Enter new name:");
+            console.log(`Welcome, ${this.name}!`);
+        } 
+    }
+}
+class Admin extends User{
+    constructor(password){
+        super(null, password);
+        this.name="admin";
+    }
+    check(name,password){
+        super.check(name,password);
+        console.log(`Good work, ${this.name}!`);
+    }
+    changeName(){
+        console.log(`It mustn't change a ${this.name} name!`);
+    }
+}
+let user=new User(prompt("Enter your name:","noname"),prompt("Enter password:","123"));
+user.check(prompt("Enter your name:","noname"),prompt("Enter password:","123"));
+user.changeName(prompt("Change name?","yes"));
+let admin=new Admin(prompt("Enter password:","456"));
+admin.check(prompt("Enter your name:","admin"),prompt("Enter password:","456"));
+admin.changeName(prompt("Change name?","yes"));

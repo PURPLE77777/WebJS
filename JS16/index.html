@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            margin: 20px 0px;
+        }
+        #map{
+            display: none;
+            margin: 10px auto;
+            width: 700px;
+            height: 500px;
+        }
+        output{
+            display: block;
+            margin: 0px auto;
+            width: 400px;
+        }
+        .container{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+        .item-img{
+            width: 100%;
+            height: 90%;
+            cursor: pointer;
+        }
+        h4{
+            margin: 0px;
+        }
+        .item{
+            margin: 15px;
+            width: 300px;
+            height: 300px;
+        }
+        .modale{
+            transition: all .3s linear 0s;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.5);
+        }
+        .modale-img{
+            margin: auto;
+            margin-top: 80px;
+            width: 600px;
+            height: 600px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">Найти!</button>
+    <div id="map"></div>
+    <output class="out"></output>
+    <div class="container">
+        <div class="item"><img src="img/1.webp" class="item-img"><h4>Эжен Делакруа «Свобода, ведущая народ» (1830)</h4></div>
+        <div class="item"><img src="img/2.webp" class="item-img"><h4>Эдвард Мунк «Крик» (1893)</h4></div>
+        <div class="item"><img src="img/3.webp" class="item-img"><h4>Энди Уорхол «Банка супа Кэмпбелл» (1962)</h4></div>
+        <div class="item"><img src="img/4.webp" class="item-img"><h4>Сальвадор Дали «Постоянство памяти» (1931)</h4></div>
+        <div class="item"><img src="img/5.webp" class="item-img"><h4>Пабло Пикассо «Герника» (1937)</h4></div>
+        <div class="item"><img src="img/6.webp" class="item-img"><h4>Винсент Ван Гог «Звездная ночь» (1889)</h4></div>
+        <div class="item"><img src="img/7.webp" class="item-img"><h4>Микеланджело «Сотворение Адама» (1511)</h4></div>
+    </div>
+    <div class="modale"><img src="" class="modale-img"></div>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=5588e166-27b4-4405-aceb-dce02edad857" type="text/javascript"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="minsk toilets.js"></script>
+</body>
+</html>
