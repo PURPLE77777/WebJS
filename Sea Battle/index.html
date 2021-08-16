@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/icon.jpg">
+    <link rel="stylesheet" href="../css//main.css">
+    <title>Sea Battle</title>
+</head>
+<body>
+    <div class="app">
+        <div class="app-header">
+            <h1 class="app-titile">Морской бой</h1>
+            <p class="app-subtitle">Разработчик: 
+                <a href="https://vk.com/id230666217" target="_blank" class="app-link">Павел Стефанович</a>
+            </p>
+        </div>
+        <div class="app-body">
+            <div data-side="player"></div>
+            <div class="menu">
+                <button class="btn" data-computer="easy" disabled>Играть против слабого</button>
+                <button class="btn" data-computer="hard" disabled>Играть против сильного</button>
+                <button class="btn" data-action="manually">Расставить корабли вручную</button>
+                <button class="btn" data-action="randomize">Расставить случайно</button>
+            </div>
+            <div data-side="opponent"></div>
+        </div>
+    </div>
+    <script src="src/Battlefield.js"></script>
+    <script src="src/BattlefieldView.js"></script>
+    <script src="src/Ship.js"></script>
+    <script src="src/ShipView.js"></script>
+    <script src="src/Application.js"></script>
+    <script src="src/script.js"></script>
+</body>
+</html>

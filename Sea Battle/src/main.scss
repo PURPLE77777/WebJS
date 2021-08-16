@@ -1,0 +1,116 @@
+body{
+    text-align: center;
+    user-select: none;
+    .app{
+        .app-header{
+            .app-titile{
+                margin: 0px;
+            }
+            .app-subtitle{
+                font-size: 13pt;
+                color: rgba(0, 0, 0, .5);
+            }
+        }
+        .app-body{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 100px;
+            .menu{
+                grid-area: "menu";
+                width: 300px;
+                margin: 0px;
+                .btn{
+                    display: block;
+                    margin: 5px 0px;
+                    padding: 10px;
+                    font-size: 12pt;
+                    width: 100%;
+                    cursor: pointer;
+                }
+            }
+        }
+        div[data-side]{
+            .battlefield{
+                width: 350px;
+                .battlefield-table{
+                    width: 100%;
+                    background-color: #e1e4ff;
+                    border-spacing: 0px;
+                    border: 1px solid rgba(0, 0, 0, .5);
+                    .battlefield-row{
+                        .battlefield-item{
+                            position: relative;
+                            padding: 0px;
+                            width: 35px;
+                            height: 35px;
+                            border: 1px solid rgba(0, 0, 0, .5);
+                            cursor: pointer;
+                            font-size: 14pt;
+                            .marker{
+                                position: absolute;
+                                width: 35px;
+                                height: 35px;
+                                cursor: default;
+                            }
+                            .marker-col{
+                                top: -35px;
+                            }
+                            .marker-row{
+                                left: -40px;
+                                top: 8px;
+                            }
+                        }
+                        .battlefield-item:hover{
+                            background-color: #d1c3c3;
+                        }
+                    }
+                }
+                .battlefield-dock{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    align-content: space-between;
+                    width: 240px;
+                    height: 200px;
+                    margin-top: 40px;
+                    .ship{
+                        border: 3px solid rgb(0, 0, 255);
+                        background-color: rgba(0, 0, 255, .5);
+                    }
+                    .ship-row-4{
+                        width: 138px;
+                        height: 35px;
+                    }
+                    .ship-row-3{
+                        width: 106px;
+                        height: 35px;
+                    }
+                    .ship-row-2{
+                        width: 69px;
+                        height: 35px;
+                    }
+                    .ship-row-1{
+                        width: 37px;
+                        height: 35px;
+                    }
+                    .ship-col-4{
+                        width: 37px;
+                        height: 138px;
+                    }
+                    .ship-col-3{
+                        width: 37px;
+                        height: 105px;
+                    }
+                    .ship-col-2{
+                        width: 37px;
+                        height: 69px;
+                    }
+                    .ship-col-1{
+                        width: 37px;
+                        height: 37px;
+                    }
+                }
+            }
+        }
+    }
+}
