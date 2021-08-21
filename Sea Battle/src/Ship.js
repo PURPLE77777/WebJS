@@ -2,8 +2,9 @@ class Ship {
     constructor (size, direction, cells, divPlayer, count) {
         //Свойства кораблей
         Object.assign(this, { size, direction });
-        this.inField = false;
+        this.ready = false;
         this.killed = false;
+        this.cell = null;
 
         //Создание блоков кораблей
         let cell = cells[0][0].getBoundingClientRect();

@@ -104,13 +104,15 @@ class Battlefield {
     }
 
     checkPosition(td, ship) {
-        // console.log(this.matrix);
         let matr = this.matrix.slice();
         let x = parseInt(td.getAttribute("data-x"));
         let y = parseInt(td.getAttribute("data-y"));
         let size = ship.size;
         let dirR = ship.direction == "row";
         let dirC = ship.direction == "col";
+        if (y + (size - 1) * dirC > 9 || x + (size - 1) * dirR > 10) {
+            return false;
+        }
         if (matr[y + (size - 1) * dirC][x + (size - 1) * dirR]) {
             let count = 3 * (size + 2);
             let countSup = 0;
@@ -139,7 +141,6 @@ class Battlefield {
             }
         }
         else {
-            // console.log(matr);
             return false;
         }
     }
