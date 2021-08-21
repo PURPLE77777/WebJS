@@ -1,6 +1,7 @@
 body{
     text-align: center;
     user-select: none;
+    // overflow: hidden;
     .app{
         .app-header{
             .app-titile{
@@ -13,101 +14,122 @@ body{
         }
         .app-body{
             display: flex;
-            justify-content: space-evenly;
-            margin-top: 100px;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin-top: 60px;
             .menu{
-                grid-area: "menu";
-                width: 300px;
+                width: 350px;
                 margin: 0px;
                 .btn{
-                    display: block;
                     margin: 5px 0px;
                     padding: 10px;
                     font-size: 12pt;
-                    width: 100%;
+                    width: 250px;
                     cursor: pointer;
                 }
             }
-        }
-        div[data-side]{
-            .battlefield{
-                width: 350px;
+            div[data-side]{
                 .battlefield-table{
                     width: 100%;
-                    background-color: #e1e4ff;
                     border-spacing: 0px;
                     border: 1px solid rgba(0, 0, 0, .5);
-                    .battlefield-row{
-                        .battlefield-item{
+                    .battlefield-tr{
+                        .battlefield-td{
                             position: relative;
                             padding: 0px;
-                            width: 35px;
-                            height: 35px;
+                            width: 30px;
+                            height: 30px;
+                            background-color: #e1e4ff;
                             border: 1px solid rgba(0, 0, 0, .5);
                             cursor: pointer;
                             font-size: 14pt;
                             .marker{
                                 position: absolute;
-                                width: 35px;
-                                height: 35px;
+                                width: 30px;
+                                height: 30px;
                                 cursor: default;
                             }
                             .marker-col{
-                                top: -35px;
+                                top: -30px;
                             }
                             .marker-row{
                                 left: -40px;
-                                top: 8px;
+                                top: 3px;
                             }
                         }
-                        .battlefield-item:hover{
+                        .battlefield-td:hover{
                             background-color: #d1c3c3;
                         }
                     }
                 }
-                .battlefield-dock{
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: space-between;
-                    align-content: space-between;
-                    width: 240px;
+                .battlefield-opponent-dock{
+                    visibility: hidden;
+                }
+                .battlefield-player-dock, .battlefield-opponent-dock{
+                    display: none;
+                    margin-top: 30px;
+                    width: 300px;
                     height: 200px;
-                    margin-top: 40px;
                     .ship{
-                        border: 3px solid rgb(0, 0, 255);
+                        position: absolute;
+                        outline: 3px solid rgb(0, 0, 255);
                         background-color: rgba(0, 0, 255, .5);
+                        z-index: 50;
+                        cursor: move;
                     }
-                    .ship-row-4{
-                        width: 138px;
-                        height: 35px;
+                    .ship-pos-good{
+                        position: absolute;
+                        outline: 3px solid rgb(0, 255, 0);
+                        background-color: rgba(0, 255, 0, .5);
+                        z-index: 50;
+                        cursor: move;
                     }
-                    .ship-row-3{
-                        width: 106px;
-                        height: 35px;
+                    .ship-pos-bad{
+                        position: absolute;
+                        outline: 3px solid rgb(255, 0, 0);
+                        background-color: rgba(255, 0, 0, .5);
+                        z-index: 50;
+                        cursor: move;
                     }
-                    .ship-row-2{
-                        width: 69px;
-                        height: 35px;
+                    .ship-row-4-0{
+                        top: 500px;
+                        left: 270px;
                     }
-                    .ship-row-1{
-                        width: 37px;
-                        height: 35px;
+                    .ship-row-3-1{
+                        top: 550px;
+                        left: 270px;
                     }
-                    .ship-col-4{
-                        width: 37px;
-                        height: 138px;
+                    .ship-row-3-2{
+                        top: 550px;
+                        left: 380px;
                     }
-                    .ship-col-3{
-                        width: 37px;
-                        height: 105px;
+                    .ship-row-2-3{
+                        top: 600px;
+                        left: 270px;
                     }
-                    .ship-col-2{
-                        width: 37px;
-                        height: 69px;
+                    .ship-row-2-4{
+                        top: 600px;
+                        left: 350px;
                     }
-                    .ship-col-1{
-                        width: 37px;
-                        height: 37px;
+                    .ship-row-2-5{
+                        top: 600px;
+                        left: 430px;
+                    }
+                    .ship-row-1-6{
+                        top: 650px;
+                        left: 270px;
+                    }
+                    .ship-row-1-7{
+                        top: 650px;
+                        left: 320px;
+                    }
+                    .ship-row-1-8{
+                        top: 650px;
+                        left: 370px;
+                    }
+                    .ship-row-1-9{
+                        top: 650px;
+                        left: 420px;
                     }
                 }
             }
