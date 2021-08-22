@@ -6,10 +6,11 @@ class Application {
         let divOpponent = document.querySelector("[data-side='opponent']");
         this.opponent = new Battlefield(document.querySelector("[data-side='opponent']"));
         let user = this.player;
+        let oppon = this.opponent;
 
         //Создание кораблей у player
         this.player.addShips(divPlayer);
-        // this.opponent.addShips(divOpponent);
+        this.opponent.addShips(divOpponent);
         //Клик на кнопку "Расставить корабли вручную"
         let btnManually = document.querySelector('[data-action="manually"]');
         btnManually.click();
@@ -152,10 +153,12 @@ class Application {
     
                     //При движении мыши с кораблём
                     ship.div.addEventListener("mousemove", move);
+
                     //При уводе мыши с корабля
                     ship.div.addEventListener("mouseout", function () {
                         ship.div.removeEventListener("mousemove", move);
                     });
+
                     //При опускании кнопки мыши
                     ship.div.addEventListener("mouseup", function (evnt) {
                         ship.div.removeEventListener("mousemove", move);
@@ -186,5 +189,54 @@ class Application {
                 }
             });
         });
+
+        //При нажатии на кнопку "Расставить корабли случайно" расставляем корабли случайно
+        let btnRandomize = document.querySelector('[data-action="randomize"]');
+        btnRandomize.addEventListener("click", function () {
+            randomize(user);
+        });
+
+        function randomValues (user, ship) {
+            let xRand = Math.floor(Math.random()*10);
+            let yRand = Math.floor(Math.random()*10);
+            let val = user === oppon ? 1 : 0;
+            ship.cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[val];
+
+            //Определяем размеры корабля в зависимости от направления
+            ship.direction = Math.round(Math.random()*100) > 50 ? "row" : "col";
+            if (ship.direction === "row") {
+                ship.div.style.height = cell.height + "px";
+                ship.div.style.width = cell.width * ship.size + "px";
+            } else {
+                ship.div.style.width = cell.width + "px";
+                ship.div.style.height = cell.height * ship.size + "px";
+            }
+
+            //Проверка позиции и вставка в поле и матрицу
+            if (user.checkPosition(ship.cell, ship)) {
+                ship.ready = true;
+                let tdRect = ship.cell.getBoundingClientRect();
+                ship.div.style.left = tdRect.left + "px";
+                ship.div.style.top = tdRect.top + "px";
+                addShipToMatrix (ship, ship.cell, user.matrix);
+            }
+            else {
+                randomValues(user, ship);
+            }
+        }
+
+        function randomize (user) {
+            for (let y = 0; y < user.matrix.length; y++) {
+                for (let x = 0; x < user.matrix[y].length; x++) {
+                    user.matrix[y][x] = true;
+                }
+            }
+            user.ships.forEach(function (ship) {
+                ship.ready = false;
+                ship.killed = false;
+                ship.cell = null;
+                randomValues(user, ship);
+            });
+        }
     }
 }

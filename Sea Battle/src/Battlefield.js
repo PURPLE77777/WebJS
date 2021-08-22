@@ -144,14 +144,4 @@ class Battlefield {
             return false;
         }
     }
-
-    resetMatrix (matrix) {
-        matrix.forEach(function (elem) {
-            elem = true;
-        });
-    }
-
-    changeMatrix (y, x, cell) {
-        this.matrix[y][x] = cell;
-    }
 }
