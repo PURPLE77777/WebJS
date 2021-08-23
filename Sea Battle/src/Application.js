@@ -11,6 +11,7 @@ class Application {
         //Создание кораблей у player
         this.player.addShips(divPlayer);
         this.opponent.addShips(divOpponent);
+        
         //Клик на кнопку "Расставить корабли вручную"
         let btnManually = document.querySelector('[data-action="manually"]');
         btnManually.click();
@@ -193,8 +194,10 @@ class Application {
         //При нажатии на кнопку "Расставить корабли случайно" расставляем корабли случайно
         let btnRandomize = document.querySelector('[data-action="randomize"]');
         btnRandomize.addEventListener("click", function () {
+            user.dock.style.display = "block";
             randomize(user);
         });
+        // btnRandomize.click();
 
         function randomValues (user, ship) {
             let xRand = Math.floor(Math.random()*10);

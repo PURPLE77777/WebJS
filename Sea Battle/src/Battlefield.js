@@ -6,6 +6,7 @@ class Battlefield {
         this.shots = [];
         this.cells = [];
         this.matrix = [];
+        this.dock = null;
 
         //Построение полей боя
         let table = document.createElement("table");
@@ -59,6 +60,7 @@ class Battlefield {
             dock.classList.add("battlefield-opponent-dock");
         }
         divPlayer.append(dock);
+        this.dock = dock;
 
         //При нажатии на кнопку "Расставить корабли вручную", появляется док кораблей
         let btnManually = document.querySelector('[data-action="manually"]');
