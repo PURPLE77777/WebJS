@@ -14,8 +14,9 @@ class Ship {
         div.style.height = cell.height + "px";
         this.div = div;
         divPlayer.children[1].append(div);
-        let divStyles = getComputedStyle(this.div);
-        this.startX = parseInt(divStyles.left);
-        this.startY = parseInt(divStyles.top);
+        // let divStyles = getComputedStyle(this.div);
+        // this.startX = parseInt(divStyles.left);
+        // this.startY = parseInt(divStyles.top);
+        // this.div.style.gridArea = "";
     }
 }

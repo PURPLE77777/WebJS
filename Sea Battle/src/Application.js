@@ -14,6 +14,9 @@ class Application {
         
         //Клик на кнопку "Расставить корабли вручную"
         let btnManually = document.querySelector('[data-action="manually"]');
+        btnManually.addEventListener("click", function() {
+            divPlayer.children[1].style.display = "grid";
+        });
         btnManually.click();
 
         //Изменение направления корабля
@@ -57,8 +60,10 @@ class Application {
             }
             catch {}
             finally {
-                evnt.target.style.left = ship.startX + "px";
-                evnt.target.style.top = ship.startY + "px";
+                evnt.target.style.position = `static`;
+                let divStyles = evnt.target.getBoundingClientRect();
+                evnt.target.style.left = divStyles.left + "px";
+                evnt.target.style.top = divStyles.top + "px";
                 if (ship.direction === "col") {
                     changeDirection(evnt);
                 }
@@ -107,13 +112,14 @@ class Application {
         }
 
         user.ships.forEach(function (ship) {
-            //При нажатии на кнопку мыши
+            //При нажатии на левую кнопку мыши
             ship.div.addEventListener("mousedown", function (e) {
                 if (e.button == 0) {
+                    e.target.style.zIndex = 100;
                     ship.ready = false;
                     removeShipFromMatrix (ship, ship.cell, user.matrix);
                     let shipDiv = e.target;
-                    let shipStyles = getComputedStyle(shipDiv);
+                    let shipStyles = e.target.getBoundingClientRect();
                     let poseX = e.clientX - parseInt(shipStyles.left);
                     let poseY = e.clientY - parseInt(shipStyles.top);
                     let cellPrevious, cellNew, firstEnter = 0;
@@ -125,6 +131,7 @@ class Application {
                         let mouseY = event.clientY - poseY;
                         shipDiv.style.left = mouseX + "px";
                         shipDiv.style.top = mouseY + "px";
+                        e.target.style.position = "absolute";
                         if (user.underField(event.target)) {
                             if (!firstEnter) {
                                 cellPrevious = user.inFieldOfCell(event.target);
@@ -154,14 +161,15 @@ class Application {
     
                     //При движении мыши с кораблём
                     ship.div.addEventListener("mousemove", move);
-
+    
                     //При уводе мыши с корабля
                     ship.div.addEventListener("mouseout", function () {
                         ship.div.removeEventListener("mousemove", move);
                     });
-
+    
                     //При опускании кнопки мыши
                     ship.div.addEventListener("mouseup", function (evnt) {
+                        evnt.target.style.zIndex = 50;
                         ship.div.removeEventListener("mousemove", move);
                         evnt.target.removeEventListener("wheel", changeDirection);
                         let cellPr = cellPrevious;
@@ -194,7 +202,7 @@ class Application {
         //При нажатии на кнопку "Расставить корабли случайно" расставляем корабли случайно
         let btnRandomize = document.querySelector('[data-action="randomize"]');
         btnRandomize.addEventListener("click", function () {
-            user.dock.style.display = "block";
+            user.dock.style.display = "grid";
             randomize(user);
         });
         // btnRandomize.click();
@@ -238,6 +246,7 @@ class Application {
                 ship.ready = false;
                 ship.killed = false;
                 ship.cell = null;
+                ship.div.style.position = "absolute";
                 randomValues(user, ship);
             });
         }

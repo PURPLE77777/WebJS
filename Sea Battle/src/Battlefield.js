@@ -62,12 +62,6 @@ class Battlefield {
         divPlayer.append(dock);
         this.dock = dock;
 
-        //При нажатии на кнопку "Расставить корабли вручную", появляется док кораблей
-        let btnManually = document.querySelector('[data-action="manually"]');
-        btnManually.addEventListener("click", function() {
-            divPlayer.children[1].style.display = "block";
-        });
-
         //Создание объектов кораблей
         for (let x = 0; x < 10; x++) {
             let ship = new Ship(parseInt("4332221111"[x]), "row", this.cells, divPlayer, x);

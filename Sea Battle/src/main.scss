@@ -70,66 +70,60 @@ body{
                     margin-top: 30px;
                     width: 300px;
                     height: 200px;
+                    grid-template-columns: repeat(5, 0px);
+                    grid-template-rows: repeat(4, 0px);
+                    gap: 50px 40px;
+                    grid-template-areas: "ship-row-4-0 . . . . "
+                                         "ship-row-3-1 . . ship-row-3-2 ."
+                                         "ship-row-2-3 . ship-row-2-4 . ship-row-2-5"
+                                         "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
                     .ship{
-                        position: absolute;
                         outline: 3px solid rgb(0, 0, 255);
                         background-color: rgba(0, 0, 255, .5);
                         z-index: 50;
                         cursor: move;
                     }
                     .ship-pos-good{
-                        position: absolute;
                         outline: 3px solid rgb(0, 255, 0);
                         background-color: rgba(0, 255, 0, .5);
                         z-index: 50;
                         cursor: move;
                     }
                     .ship-pos-bad{
-                        position: absolute;
                         outline: 3px solid rgb(255, 0, 0);
                         background-color: rgba(255, 0, 0, .5);
                         z-index: 50;
                         cursor: move;
                     }
                     .ship-row-4-0{
-                        top: 500px;
-                        left: 270px;
+                        grid-area: ship-row-4-0;
                     }
                     .ship-row-3-1{
-                        top: 550px;
-                        left: 270px;
+                        grid-area: ship-row-3-1;
                     }
                     .ship-row-3-2{
-                        top: 550px;
-                        left: 380px;
+                        grid-area: ship-row-3-2;
                     }
                     .ship-row-2-3{
-                        top: 600px;
-                        left: 270px;
+                        grid-area: ship-row-2-3;
                     }
                     .ship-row-2-4{
-                        top: 600px;
-                        left: 350px;
+                        grid-area: ship-row-2-4;
                     }
                     .ship-row-2-5{
-                        top: 600px;
-                        left: 430px;
+                        grid-area: ship-row-2-5;
                     }
                     .ship-row-1-6{
-                        top: 650px;
-                        left: 270px;
+                        grid-area: ship-row-1-6;
                     }
                     .ship-row-1-7{
-                        top: 650px;
-                        left: 320px;
+                        grid-area: ship-row-1-7;
                     }
                     .ship-row-1-8{
-                        top: 650px;
-                        left: 370px;
+                        grid-area: ship-row-1-8;
                     }
                     .ship-row-1-9{
-                        top: 650px;
-                        left: 420px;
+                        grid-area: ship-row-1-9;
                     }
                 }
             }

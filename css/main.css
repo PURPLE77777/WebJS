@@ -86,10 +86,15 @@ body .app .app-body div[data-side] .battlefield-player-dock, body .app .app-body
   margin-top: 30px;
   width: 300px;
   height: 200px;
+  -ms-grid-columns: (0px)[5];
+      grid-template-columns: repeat(5, 0px);
+  -ms-grid-rows: (0px)[4];
+      grid-template-rows: repeat(4, 0px);
+  gap: 50px 40px;
+      grid-template-areas: "ship-row-4-0 . . . . " "ship-row-3-1 . . ship-row-3-2 ." "ship-row-2-3 . ship-row-2-4 . ship-row-2-5" "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship, body .app .app-body div[data-side] .battlefield-opponent-dock .ship {
-  position: absolute;
   outline: 3px solid blue;
   background-color: rgba(0, 0, 255, 0.5);
   z-index: 50;
@@ -97,7 +102,6 @@ body .app .app-body div[data-side] .battlefield-player-dock .ship, body .app .ap
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-good, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-pos-good {
-  position: absolute;
   outline: 3px solid lime;
   background-color: rgba(0, 255, 0, 0.5);
   z-index: 50;
@@ -105,7 +109,6 @@ body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-good, body
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-bad, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-pos-bad {
-  position: absolute;
   outline: 3px solid red;
   background-color: rgba(255, 0, 0, 0.5);
   z-index: 50;
@@ -113,51 +116,61 @@ body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-bad, body 
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-4-0, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-4-0 {
-  top: 500px;
-  left: 270px;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: ship-row-4-0;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-3-1, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-3-1 {
-  top: 550px;
-  left: 270px;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: ship-row-3-1;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-3-2, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-3-2 {
-  top: 550px;
-  left: 380px;
+  -ms-grid-row: 2;
+  -ms-grid-column: 4;
+  grid-area: ship-row-3-2;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-3, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-3 {
-  top: 600px;
-  left: 270px;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: ship-row-2-3;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-4, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-4 {
-  top: 600px;
-  left: 350px;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: ship-row-2-4;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-5, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-5 {
-  top: 600px;
-  left: 430px;
+  -ms-grid-row: 3;
+  -ms-grid-column: 5;
+  grid-area: ship-row-2-5;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-6, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-6 {
-  top: 650px;
-  left: 270px;
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: ship-row-1-6;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-7, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-7 {
-  top: 650px;
-  left: 320px;
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: ship-row-1-7;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-8, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-8 {
-  top: 650px;
-  left: 370px;
+  -ms-grid-row: 4;
+  -ms-grid-column: 3;
+  grid-area: ship-row-1-8;
 }
 
 body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-9, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-9 {
-  top: 650px;
-  left: 420px;
+  -ms-grid-row: 4;
+  -ms-grid-column: 4;
+  grid-area: ship-row-1-9;
 }
