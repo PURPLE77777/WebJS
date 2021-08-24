@@ -7,6 +7,7 @@ class Battlefield {
         this.cells = [];
         this.matrix = [];
         this.dock = null;
+        this.readyToGame = false;
 
         //Построение полей боя
         let table = document.createElement("table");
@@ -27,6 +28,7 @@ class Battlefield {
             this.cells.push(row);
         }
         div.append(table);
+        this.table = table;
 
         //Создание меток сверху и слева полей боя
         for (let x = 0; x < 10; x++) {
@@ -40,7 +42,7 @@ class Battlefield {
             this.cells[x][0].append(markNumber);
         }
 
-        //Инициализация свойство matrix для корректной расстановки кораблей
+        //Инициализация свойства matrix для корректной расстановки кораблей
         for (let y = 0; y < 10; y++) {
             let row = [];
             for (let x = 0; x < 10; x++) {
@@ -48,17 +50,21 @@ class Battlefield {
             }
             this.matrix.push(row);
         }
+
+        //Инициализация свойства shots для стрельбы
+        for (let y = 0; y < 10; y++) {
+            let rw = [];
+            for (let x = 0; x < 10; x++) {
+                rw[x] = true;
+            }
+            this.shots.push(rw);
+        }
     }
 
     addShips (divPlayer) {
         //Создание дока, где будут располагаться корабли
         let dock = document.createElement("div");
-        if (divPlayer.getAttribute("data-side") == "player") {
-            dock.classList.add("battlefield-player-dock");
-        }
-        else {
-            dock.classList.add("battlefield-opponent-dock");
-        }
+        dock.classList.add("battlefield-dock");
         divPlayer.append(dock);
         this.dock = dock;
 
@@ -106,7 +112,7 @@ class Battlefield {
         let size = ship.size;
         let dirR = ship.direction == "row";
         let dirC = ship.direction == "col";
-        if (y + (size - 1) * dirC > 9 || x + (size - 1) * dirR > 10) {
+        if (y + (size - 1) * dirC > 9 || x + (size - 1) * dirR > 9) {
             return false;
         }
         if (matr[y + (size - 1) * dirC][x + (size - 1) * dirR]) {

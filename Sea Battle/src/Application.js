@@ -7,6 +7,20 @@ class Application {
         this.opponent = new Battlefield(document.querySelector("[data-side='opponent']"));
         let user = this.player;
         let oppon = this.opponent;
+        let btnEasy = document.querySelector('[data-computer="easy"]');
+        btnEasy.addEventListener("click", function (clk) {
+            if (clk.button == 0) {
+                // oppon.dock.style.visibility = "visible"; //Надо убрать!
+                randomize(oppon);
+            }
+        });
+        let btnHard = document.querySelector('[data-computer="hard"]');
+        btnHard.addEventListener("click", function (clk) {
+            if (clk.button == 0) {
+                // oppon.dock.style.visibility = "visible"; //Надо убрать!
+                randomize(oppon);
+            }
+        });
 
         //Создание кораблей у player
         this.player.addShips(divPlayer);
@@ -15,7 +29,7 @@ class Application {
         //Клик на кнопку "Расставить корабли вручную"
         let btnManually = document.querySelector('[data-action="manually"]');
         btnManually.addEventListener("click", function() {
-            divPlayer.children[1].style.display = "grid";
+            divPlayer.children[1].style.visibility = "visible";
         });
         btnManually.click();
 
@@ -53,7 +67,7 @@ class Application {
             }
         }
 
-        //Если опустил ЛКМ, когда нельзя было ставить корабль или вне поля
+        //Если отпустил ЛКМ, когда нельзя было ставить корабль или вне поля
         function toStartPosition (ship, evnt, cellPr) {
             try {
                 cellPr.style.backgroundColor = "#e1e4ff";
@@ -74,9 +88,10 @@ class Application {
         }
 
         //Регистрация корабля в матрице
-        function addShipToMatrix (ship, cellCur, matrix) {
+        function addShipToMatrix (ship, cellCur, matrix, user) {
             try {
                 ship.cell.style.backgroundColor = "#e1e4ff";
+                let val = user === oppon ? 1 : 0;
                 let y = Number(cellCur.getAttribute("data-y"));
                 let x = Number(cellCur.getAttribute("data-x"));
                 let shipRow = ship.direction == "row";
@@ -84,6 +99,8 @@ class Application {
                 for (let dy = y; dy <= y + ship.size * shipCol - shipCol; dy++) {
                     for (let dx = x; dx <= x + ship.size * shipRow - shipRow; dx++) {
                         matrix[dy][dx] = false;
+                        let cell = document.querySelectorAll(`[data-y="${dy}"][data-x="${dx}"]`)[val];
+                        ship.cells.push(cell);
                     }
                 }
             }
@@ -93,8 +110,9 @@ class Application {
         }
 
         //Освобождаем позиции в матрице
-        function removeShipFromMatrix (ship, cellCur, matrix) {
+        function removeShipFromMatrix (ship, cellCur, matrix, user) {
             try {
+                let val = user === oppon ? 1 : 0;
                 let y = Number(cellCur.getAttribute("data-y"));
                 let x = Number(cellCur.getAttribute("data-x"));
                 let shipRow = ship.direction == "row";
@@ -102,6 +120,9 @@ class Application {
                 for (let dy = y; dy <= y + ship.size * shipCol - shipCol; dy++) {
                     for (let dx = x; dx <= x + ship.size * shipRow - shipRow; dx++) {
                         matrix[dy][dx] = true;
+                        let cell = document.querySelectorAll(`[data-y="${dy}"][data-x="${dx}"]`)[val];
+                        let index = ship.cells.indexOf(cell);
+                        ship.cells.splice(index, 1);
                     }
                 }
                 ship.ready = false;
@@ -114,10 +135,10 @@ class Application {
         user.ships.forEach(function (ship) {
             //При нажатии на левую кнопку мыши
             ship.div.addEventListener("mousedown", function (e) {
-                if (e.button == 0) {
+                if (e.button == 0 && ship.canChangePosition) {
                     e.target.style.zIndex = 100;
                     ship.ready = false;
-                    removeShipFromMatrix (ship, ship.cell, user.matrix);
+                    removeShipFromMatrix (ship, ship.cell, user.matrix, user);
                     let shipDiv = e.target;
                     let shipStyles = e.target.getBoundingClientRect();
                     let poseX = e.clientX - parseInt(shipStyles.left);
@@ -126,6 +147,7 @@ class Application {
                     
                     //Перемещение блока
                     function move (event) {
+                        checkReady();
                         event.target.addEventListener("wheel", changeDirection);
                         let mouseX = event.clientX - poseX;
                         let mouseY = event.clientY - poseY;
@@ -179,19 +201,22 @@ class Application {
                         if (!ship.ready) {
                             if (user.underField(evnt.target)) {
                                 if (user.checkPosition(cellCur, ship)) {
-                                    removeShipFromMatrix (ship, ship.cell, user.matrix);
+                                    removeShipFromMatrix (ship, ship.cell, user.matrix, user);
                                     ship.cell = cellCur;
                                     placeToField (ship, evnt, cellPr);
-                                    addShipToMatrix (ship, cellCur, user.matrix);
+                                    addShipToMatrix (ship, cellCur, user.matrix, user);
+                                    checkReady();
                                 }
                                 else {
                                     toStartPosition (ship, evnt, cellPr);
-                                    removeShipFromMatrix (ship, ship.cell, user.matrix);
+                                    removeShipFromMatrix (ship, ship.cell, user.matrix, user);
+                                    checkReady();
                                 }
                             } 
                             else {
                                 toStartPosition (ship, evnt, cellPr);
-                                removeShipFromMatrix (ship, ship.cell, user.matrix);
+                                removeShipFromMatrix (ship, ship.cell, user.matrix, user);
+                                checkReady();
                             }
                         }
                     });
@@ -199,13 +224,26 @@ class Application {
             });
         });
 
+        //Проверка на готовность к игре
+        function checkReady () {
+            if (user.ships.every(function (ship) { return ship.ready === true; })) {
+                user.readyToGame = true;
+                btnEasy.removeAttribute("disabled");
+                btnHard.removeAttribute("disabled");
+            } else {
+                user.readyToGame = false;
+                btnEasy.setAttribute("disabled", "true");
+                btnHard.setAttribute("disabled", "true");
+            }
+        }
+
         //При нажатии на кнопку "Расставить корабли случайно" расставляем корабли случайно
         let btnRandomize = document.querySelector('[data-action="randomize"]');
         btnRandomize.addEventListener("click", function () {
-            user.dock.style.display = "grid";
+            user.dock.style.visibility = "visible";
             randomize(user);
         });
-        // btnRandomize.click();
+        btnRandomize.click();
 
         function randomValues (user, ship) {
             let xRand = Math.floor(Math.random()*10);
@@ -214,7 +252,7 @@ class Application {
             ship.cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[val];
 
             //Определяем размеры корабля в зависимости от направления
-            ship.direction = Math.round(Math.random()*100) > 50 ? "row" : "col";
+            ship.direction = Math.ceil(Math.random()*100) > 50 ? "row" : "col";
             if (ship.direction === "row") {
                 ship.div.style.height = cell.height + "px";
                 ship.div.style.width = cell.width * ship.size + "px";
@@ -226,10 +264,11 @@ class Application {
             //Проверка позиции и вставка в поле и матрицу
             if (user.checkPosition(ship.cell, ship)) {
                 ship.ready = true;
+                ship.div.style.position = "absolute";
                 let tdRect = ship.cell.getBoundingClientRect();
                 ship.div.style.left = tdRect.left + "px";
                 ship.div.style.top = tdRect.top + "px";
-                addShipToMatrix (ship, ship.cell, user.matrix);
+                addShipToMatrix (ship, ship.cell, user.matrix, user);
             }
             else {
                 randomValues(user, ship);
@@ -243,12 +282,25 @@ class Application {
                 }
             }
             user.ships.forEach(function (ship) {
+                ship.div.style.position = `static`;
+                let divStyles = ship.div.getBoundingClientRect();
+                ship.div.style.left = divStyles.left + "px";
+                ship.div.style.top = divStyles.top + "px";
+                if (ship.direction === "col") {
+                    ship.div.style.height = cell.height + "px";
+                    ship.div.style.width = cell.width * ship.size + "px";
+                    ship.direction = "row";
+                }
+            });
+            user.ships.forEach(function (ship) {
+                removeShipFromMatrix(ship, ship.cell, user.matrix, user);
                 ship.ready = false;
                 ship.killed = false;
                 ship.cell = null;
                 ship.div.style.position = "absolute";
                 randomValues(user, ship);
             });
+            checkReady();
         }
     }
 }

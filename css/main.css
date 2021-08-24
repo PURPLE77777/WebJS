@@ -4,6 +4,7 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  overflow: hidden;
 }
 
 body .app .app-header .app-titile {
@@ -29,7 +30,6 @@ body .app .app-body {
 
 body .app .app-body .menu {
   width: 350px;
-  margin: 0px;
 }
 
 body .app .app-body .menu .btn {
@@ -40,8 +40,33 @@ body .app .app-body .menu .btn {
   cursor: pointer;
 }
 
+body .app .app-body .event {
+  display: none;
+  width: 350px;
+}
+
+body .app .app-body .event .helper-move {
+  display: none;
+  margin: 120px 0px 0px 150px;
+  width: 0px;
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-left: 0px solid green;
+  border-right: 0px solid red;
+  -webkit-transition: .5s ease all 0s;
+  transition: .5s ease all 0s;
+}
+
+body .app .app-body .event .winner {
+  display: none;
+  margin: 30px auto;
+  width: 80%;
+  height: 250px;
+}
+
 body .app .app-body div[data-side] .battlefield-table {
   width: 100%;
+  z-index: 1000;
   border-spacing: 0px;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
@@ -73,16 +98,23 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
   top: 3px;
 }
 
+body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td span {
+  font-size: 40pt;
+  height: 30px;
+  width: 30px;
+  top: -15px;
+  left: 0px;
+  position: absolute;
+}
+
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td:hover {
   background-color: #d1c3c3;
 }
 
-body .app .app-body div[data-side] .battlefield-opponent-dock {
+body .app .app-body div[data-side] .battlefield-dock {
   visibility: hidden;
-}
-
-body .app .app-body div[data-side] .battlefield-player-dock, body .app .app-body div[data-side] .battlefield-opponent-dock {
-  display: none;
+  display: -ms-grid;
+  display: grid;
   margin-top: 30px;
   width: 300px;
   height: 200px;
@@ -94,82 +126,82 @@ body .app .app-body div[data-side] .battlefield-player-dock, body .app .app-body
       grid-template-areas: "ship-row-4-0 . . . . " "ship-row-3-1 . . ship-row-3-2 ." "ship-row-2-3 . ship-row-2-4 . ship-row-2-5" "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship, body .app .app-body div[data-side] .battlefield-opponent-dock .ship {
+body .app .app-body div[data-side] .battlefield-dock .ship {
   outline: 3px solid blue;
   background-color: rgba(0, 0, 255, 0.5);
   z-index: 50;
   cursor: move;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-good, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-pos-good {
+body .app .app-body div[data-side] .battlefield-dock .ship-pos-good {
   outline: 3px solid lime;
   background-color: rgba(0, 255, 0, 0.5);
   z-index: 50;
   cursor: move;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-pos-bad, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-pos-bad {
+body .app .app-body div[data-side] .battlefield-dock .ship-pos-bad {
   outline: 3px solid red;
   background-color: rgba(255, 0, 0, 0.5);
   z-index: 50;
   cursor: move;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-4-0, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-4-0 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-4-0 {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: ship-row-4-0;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-3-1, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-3-1 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-3-1 {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: ship-row-3-1;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-3-2, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-3-2 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-3-2 {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
   grid-area: ship-row-3-2;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-3, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-3 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-2-3 {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: ship-row-2-3;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-4, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-4 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-2-4 {
   -ms-grid-row: 3;
   -ms-grid-column: 3;
   grid-area: ship-row-2-4;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-2-5, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-2-5 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-2-5 {
   -ms-grid-row: 3;
   -ms-grid-column: 5;
   grid-area: ship-row-2-5;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-6, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-6 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-1-6 {
   -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: ship-row-1-6;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-7, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-7 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-1-7 {
   -ms-grid-row: 4;
   -ms-grid-column: 2;
   grid-area: ship-row-1-7;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-8, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-8 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-1-8 {
   -ms-grid-row: 4;
   -ms-grid-column: 3;
   grid-area: ship-row-1-8;
 }
 
-body .app .app-body div[data-side] .battlefield-player-dock .ship-row-1-9, body .app .app-body div[data-side] .battlefield-opponent-dock .ship-row-1-9 {
+body .app .app-body div[data-side] .battlefield-dock .ship-row-1-9 {
   -ms-grid-row: 4;
   -ms-grid-column: 4;
   grid-area: ship-row-1-9;

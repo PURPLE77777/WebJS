@@ -1,7 +1,7 @@
 body{
     text-align: center;
     user-select: none;
-    // overflow: hidden;
+    overflow: hidden;
     .app{
         .app-header{
             .app-titile{
@@ -19,7 +19,6 @@ body{
             margin-top: 60px;
             .menu{
                 width: 350px;
-                margin: 0px;
                 .btn{
                     margin: 5px 0px;
                     padding: 10px;
@@ -28,9 +27,30 @@ body{
                     cursor: pointer;
                 }
             }
+            .event{
+                display: none;
+                width: 350px;
+                .helper-move{
+                    display: none;
+                    margin: 120px 0px 0px 150px;
+                    width: 0px;
+                    border-top: 30px solid transparent;
+                    border-bottom: 30px solid transparent;
+                    border-left: 0px solid green;
+                    border-right: 0px solid red;
+                    transition: .5s ease all 0s;
+                }
+                .winner{
+                    display: none;
+                    margin: 30px auto;
+                    width: 80%;
+                    height: 250px;
+                }
+            }
             div[data-side]{
                 .battlefield-table{
                     width: 100%;
+                    z-index: 1000;
                     border-spacing: 0px;
                     border: 1px solid rgba(0, 0, 0, .5);
                     .battlefield-tr{
@@ -56,17 +76,23 @@ body{
                                 left: -40px;
                                 top: 3px;
                             }
+                            span{
+                                font-size: 40pt;
+                                height: 30px;
+                                width: 30px;
+                                top: -15px;
+                                left: 0px;
+                                position: absolute;
+                            }
                         }
                         .battlefield-td:hover{
                             background-color: #d1c3c3;
                         }
                     }
                 }
-                .battlefield-opponent-dock{
+                .battlefield-dock{
                     visibility: hidden;
-                }
-                .battlefield-player-dock, .battlefield-opponent-dock{
-                    display: none;
+                    display: grid;
                     margin-top: 30px;
                     width: 300px;
                     height: 200px;
