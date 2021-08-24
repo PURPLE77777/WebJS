@@ -31,7 +31,7 @@ class Application {
         btnManually.addEventListener("click", function() {
             divPlayer.children[1].style.visibility = "visible";
         });
-        btnManually.click();
+        // btnManually.click();
 
         //Изменение направления корабля
         let cell = user.cells[0][0].getBoundingClientRect();
@@ -243,7 +243,7 @@ class Application {
             user.dock.style.visibility = "visible";
             randomize(user);
         });
-        btnRandomize.click();
+        // btnRandomize.click();
 
         function randomValues (user, ship) {
             let xRand = Math.floor(Math.random()*10);

@@ -238,4 +238,4 @@ btnHard.addEventListener("click", function () {
         playerMove();
     }
 });
-btnHard.click();
+// btnHard.click();
