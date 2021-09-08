@@ -7,16 +7,16 @@ body {
   overflow: hidden;
 }
 
-body .app .app-header .app-titile {
+body .app .app-header {
+  margin-top: 40px;
+}
+
+body .app .app-header .app-title {
   margin: 0px;
 }
 
-body .app .app-header .app-subtitle {
-  font-size: 13pt;
-  color: rgba(0, 0, 0, 0.5);
-}
-
 body .app .app-body {
+  min-width: 1520px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -109,6 +109,15 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td:hover {
   background-color: #d1c3c3;
+}
+
+body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted {
+  z-index: 1000;
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted:hover {
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 body .app .app-body div[data-side] .battlefield-dock {
@@ -205,4 +214,17 @@ body .app .app-body div[data-side] .battlefield-dock .ship-row-1-9 {
   -ms-grid-row: 4;
   -ms-grid-column: 4;
   grid-area: ship-row-1-9;
+}
+
+body .app .app-body div[data-side] .battlefield-dock .killed {
+  outline: 3px solid red;
+}
+
+body .app .app-footer {
+  margin-top: 20px;
+}
+
+body .app .app-footer .app-subtitle {
+  font-size: 13pt;
+  color: rgba(0, 0, 0, 0.5);
 }

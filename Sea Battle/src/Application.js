@@ -31,7 +31,7 @@ class Application {
         btnManually.addEventListener("click", function() {
             divPlayer.children[1].style.visibility = "visible";
         });
-        // btnManually.click();
+        btnManually.click();
 
         //Изменение направления корабля
         let cell = user.cells[0][0].getBoundingClientRect();
@@ -243,7 +243,7 @@ class Application {
             user.dock.style.visibility = "visible";
             randomize(user);
         });
-        // btnRandomize.click();
+        btnRandomize.click();
 
         function randomValues (user, ship) {
             let xRand = Math.floor(Math.random()*10);
@@ -286,6 +286,7 @@ class Application {
                 let divStyles = ship.div.getBoundingClientRect();
                 ship.div.style.left = divStyles.left + "px";
                 ship.div.style.top = divStyles.top + "px";
+                removeShipFromMatrix(ship, ship.cell, user.matrix, user);
                 if (ship.direction === "col") {
                     ship.div.style.height = cell.height + "px";
                     ship.div.style.width = cell.width * ship.size + "px";
@@ -293,7 +294,6 @@ class Application {
                 }
             });
             user.ships.forEach(function (ship) {
-                removeShipFromMatrix(ship, ship.cell, user.matrix, user);
                 ship.ready = false;
                 ship.killed = false;
                 ship.cell = null;

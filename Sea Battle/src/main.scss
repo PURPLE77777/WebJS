@@ -4,15 +4,13 @@ body{
     overflow: hidden;
     .app{
         .app-header{
-            .app-titile{
+            margin-top: 40px;
+            .app-title{
                 margin: 0px;
-            }
-            .app-subtitle{
-                font-size: 13pt;
-                color: rgba(0, 0, 0, .5);
             }
         }
         .app-body{
+            min-width: 1520px;
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
@@ -88,6 +86,13 @@ body{
                         .battlefield-td:hover{
                             background-color: #d1c3c3;
                         }
+                        .hitted{
+                            z-index: 1000;
+                            background-color: rgba(255, 0, 0, .5);
+                        }
+                        .hitted:hover{
+                            background-color: rgba(255, 0, 0, .5);
+                        }
                     }
                 }
                 .battlefield-dock{
@@ -151,7 +156,17 @@ body{
                     .ship-row-1-9{
                         grid-area: ship-row-1-9;
                     }
+                    .killed{
+                        outline: 3px solid rgb(255, 0, 0);
+                    }
                 }
+            }
+        }
+        .app-footer{
+            margin-top: 20px;
+            .app-subtitle{
+                font-size: 13pt;
+                color: rgba(0, 0, 0, .5);
             }
         }
     }
