@@ -5,25 +5,18 @@ body {
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
-  margin: 0px;
-}
-
-body .app {
-  background: url(../Sea_Battle/img/battleship.jpg) center no-repeat;
-  background-size: cover;
 }
 
 body .app .app-header {
-  padding: 20px 0px 20px 0px;
-  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 40px;
 }
 
 body .app .app-header .app-title {
   margin: 0px;
-  color: white;
 }
 
 body .app .app-body {
+  min-width: 1520px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -45,57 +38,6 @@ body .app .app-body .menu .btn {
   font-size: 12pt;
   width: 250px;
   cursor: pointer;
-  border-radius: 20px;
-}
-
-body .app .app-body .menu button[data-computer="easy"] {
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
-}
-
-body .app .app-body .menu button[data-computer="easy"]:hover {
-  -webkit-box-shadow: inset 0px 0px 20px 10px green;
-          box-shadow: inset 0px 0px 20px 10px green;
-}
-
-body .app .app-body .menu button[data-computer="middle"] {
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
-}
-
-body .app .app-body .menu button[data-computer="middle"]:hover {
-  -webkit-box-shadow: inset 0px 0px 20px 10px yellow;
-          box-shadow: inset 0px 0px 20px 10px yellow;
-}
-
-body .app .app-body .menu button[data-computer="hard"] {
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
-}
-
-body .app .app-body .menu button[data-computer="hard"]:hover {
-  -webkit-box-shadow: inset 0px 0px 20px 10px red;
-          box-shadow: inset 0px 0px 20px 10px red;
-}
-
-body .app .app-body .menu button[data-action="manually"] {
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
-}
-
-body .app .app-body .menu button[data-action="manually"]:hover {
-  background: url(../Sea_Battle/img/manual.gif) center no-repeat;
-  background-size: cover;
-}
-
-body .app .app-body .menu button[data-action="randomize"] {
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
-}
-
-body .app .app-body .menu button[data-action="randomize"]:hover {
-  background: url(../Sea_Battle/img/random.gif) center no-repeat;
-  background-size: cover;
 }
 
 body .app .app-body .event {
@@ -145,7 +87,6 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
   width: 30px;
   height: 30px;
   cursor: default;
-  font-weight: bold;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .marker-col {
@@ -161,11 +102,9 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
   font-size: 40pt;
   height: 30px;
   width: 30px;
-  top: 0px;
+  top: -15px;
   left: 0px;
   position: absolute;
-  background: url(../Sea_Battle/img/waves.png) center no-repeat;
-  background-size: cover;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td:hover {
@@ -174,11 +113,11 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted {
   z-index: 1000;
-  background-color: #9f1b1b;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted:hover {
-  background-color: #9f1b1b;
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 body .app .app-body div[data-side] .battlefield-dock {
@@ -283,16 +222,9 @@ body .app .app-body div[data-side] .battlefield-dock .killed {
 
 body .app .app-footer {
   margin-top: 20px;
-  height: 100px;
-  padding-top: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 body .app .app-footer .app-subtitle {
   font-size: 13pt;
-  color: white;
-}
-
-body .app .app-footer .app-subtitle .app-link {
-  color: #ffe500;
+  color: rgba(0, 0, 0, 0.5);
 }

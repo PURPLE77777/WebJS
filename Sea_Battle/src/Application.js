@@ -5,19 +5,30 @@ class Application {
         this.player = new Battlefield(divPlayer);
         let divOpponent = document.querySelector("[data-side='opponent']");
         this.opponent = new Battlefield(document.querySelector("[data-side='opponent']"));
+        
+        let app = document.querySelector("div.app");
+        let widthWindow = document.documentElement.clientWidth;
+        let heightWindow = document.documentElement.clientHeight;
+        app.style.width = widthWindow + "px";
+        app.style.height = heightWindow + "px";
+        
         let user = this.player;
         let oppon = this.opponent;
         let btnEasy = document.querySelector('[data-computer="easy"]');
         btnEasy.addEventListener("click", function (clk) {
             if (clk.button == 0) {
-                // oppon.dock.style.visibility = "visible"; //Надо убрать!
+                randomize(oppon);
+            }
+        });
+        let btnMiddle = document.querySelector('[data-computer="middle"]');
+        btnMiddle.addEventListener("click", function (clk) {
+            if (clk.button == 0) {
                 randomize(oppon);
             }
         });
         let btnHard = document.querySelector('[data-computer="hard"]');
         btnHard.addEventListener("click", function (clk) {
             if (clk.button == 0) {
-                // oppon.dock.style.visibility = "visible"; //Надо убрать!
                 randomize(oppon);
             }
         });
@@ -31,7 +42,6 @@ class Application {
         btnManually.addEventListener("click", function() {
             divPlayer.children[1].style.visibility = "visible";
         });
-        btnManually.click();
 
         //Изменение направления корабля
         let cell = user.cells[0][0].getBoundingClientRect();
@@ -229,10 +239,12 @@ class Application {
             if (user.ships.every(function (ship) { return ship.ready === true; })) {
                 user.readyToGame = true;
                 btnEasy.removeAttribute("disabled");
+                btnMiddle.removeAttribute("disabled");
                 btnHard.removeAttribute("disabled");
             } else {
                 user.readyToGame = false;
                 btnEasy.setAttribute("disabled", "true");
+                btnMiddle.setAttribute("disabled", "true");
                 btnHard.setAttribute("disabled", "true");
             }
         }
@@ -243,7 +255,6 @@ class Application {
             user.dock.style.visibility = "visible";
             randomize(user);
         });
-        btnRandomize.click();
 
         function randomValues (user, ship) {
             let xRand = Math.floor(Math.random()*10);

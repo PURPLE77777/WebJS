@@ -6,8 +6,9 @@ let eventBlock = document.getElementsByClassName("event")[0];
 let helperMove = document.getElementsByClassName("helper-move")[0];
 let result = document.getElementsByClassName("winner")[0];
 let btnEasy = document.querySelector('[data-computer="easy"]');
+let btnMiddle = document.querySelector('[data-computer="middle"]');
 let btnHard = document.querySelector('[data-computer="hard"]');
-let activeBot, levelArray;
+let activeBot, levelArray, up = true, right = true, bottom = true, left = true;
 
 function prepareForGame () {
     //Убираем меню и отображаем подсказчика ходов
@@ -59,7 +60,7 @@ function addShotsAroundDeadShip(user, shipDead) {
                         let cell = user.cells[dy][dx];
                         let miss = document.createElement("span");
                         miss.style.zIndex = "1050";
-                        miss.innerHTML = '\u00B7';
+                        // miss.innerHTML = '\u00B7';
                         cell.append(miss);
                         countSup++;
                     }
@@ -109,33 +110,30 @@ function endGame (winner) {
         }
     });
     if (winner == player) {
-        result.style.background = 'url("/Sea Battle/img/win.png") round';
+        result.style.background = 'url("../Sea_Battle/img/win.png") round';
     } else {
-        result.style.background = 'url("/Sea Battle/img/lose.png") round';
+        result.style.background = 'url("../Sea_Battle/img/lose.png") round';
         opponent.dock.style.visibility = "visible";
     }
-    console.log("Конец игры");
 }
 
-
-let hit = false, shipNow, cell, direct = null, xRand, yRand, level;
+let hit = false, shipNow, cell, xRand, yRand, level;
 function botMove() {
     if (!hit) {
         xRand = Math.floor(Math.random()*10);
         yRand = Math.floor(Math.random()*10);
-        // Сюда надо добавить передачу массива, по которому бот определяет, куда можно не стрелять, и его проверку
         let checkValue = 0;
         player.shots.forEach(function (shotsRow) {
             shotsRow.forEach(function (elem) {
                 if (elem == false) { checkValue++; }
             });
         });
-        if (100 - checkValue == level) {
-            player.shots.forEach(function (shotsRow) {
-                shotsRow.forEach(function (elem) {
-                    if (elem == null) { elem = true; }
-                });
-            });
+        if (100 - checkValue <= level) {
+            for (let y = 0; y < player.shots.length; y++) {
+                for (let x = 0; x < player.shots[y].length; x++) {
+                    if (player.shots[y][x] == null) player.shots[y][x] = true;
+                }
+            }
         }
         if(player.shots[yRand][xRand] == true) {
             player.shots[yRand][xRand] = false;
@@ -148,7 +146,21 @@ function botMove() {
                         break;
                     } 
                 }
-                setTimeout(botMove, 1000);
+                cell.classList.add("hitted");
+                cell.style.backgroundColor = "rgb(159, 27, 27)";
+                let index = shipNow.cells.indexOf(cell);
+                shipNow.cells.splice(index, 1);
+                shipNow.hp -= 1;
+                if (shipNow.hp == 0) {
+                    shipNow.div.classList.add("killed");
+                    addShotsAroundDeadShip(player, shipNow);
+                    hit = false;
+                    shipNow.killed = true;
+                }
+                if (player.ships.every(function (ship) { return ship.killed; })) {
+                    endGame(opponent);
+                } 
+                else setTimeout(botMove, 1000);
             } else {
                 addMiss();
                 playerMove();
@@ -157,110 +169,140 @@ function botMove() {
             botMove();
         }
     } else {
-        if (direct === null) {
-            cell.classList.add("hitted");
-            cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-            let index = shipNow.cells.indexOf(cell);
-            shipNow.cells.splice(index, 1);
-            shipNow.hp -= 1;
-            if (shipNow.hp == 0) {
-                shipNow.div.classList.add("killed");
-                addShotsAroundDeadShip(player, shipNow);
-                hit = false;
-                setTimeout(botMove, 1000);
-            } else { addRandBotShot(); }
-        } else if (direct == "col") {
-            let radDir = Math.round(Math.random() * 100);
-            if (radDir < 50 && yRand - 1 > -1 && player.shots[yRand - 1][xRand] === true) {
-                player.shots[yRand - 1][xRand] = false;
-                if (player.matrix[yRand - 1][xRand] === false) {
-                    yRand--;
-                    cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+        let count = 0;
+        if (up && yRand - 1 > -1) count++; else up = false;
+        if (bottom && yRand + 1 < 10) count++; else bottom = false;
+        if (right && xRand + 1 < 10) count++; else right = false;
+        if (left && xRand - 1 > -1) count++; else left = false; 
+        let randShot = Math.floor(Math.random() * 100);
+
+        if (up && randShot < Math.floor(100 / count)) {
+            if (player.shots[yRand - 1][xRand] === true) {
+                player.shots[yRand - 1][xRand] = false; 
+                yRand = yRand - 1;
+                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                if (player.matrix[yRand][xRand] === false) {
                     cell.classList.add("hitted");
-                    cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
+                    cell.style.backgroundColor = "rgb(159, 27, 27)";
                     let index = shipNow.cells.indexOf(cell);
                     shipNow.cells.splice(index, 1);
                     shipNow.hp -= 1;
                     if (shipNow.hp == 0) {
                         shipNow.div.classList.add("killed");
                         addShotsAroundDeadShip(player, shipNow);
-                        direct = null;
                         hit = false;
+                        right = true; bottom = true; left = true;
+                        shipNow.killed = true;
+                        if (player.ships.every(function (ship) { return ship.killed; })) {
+                            endGame(opponent);
+                        } 
+                        else setTimeout(botMove, 1000);
+                    }
+                    else {
+                        right = false; left = false;
                         setTimeout(botMove, 1000);
                     }
-                } else { 
-                    addMiss(); 
-                    yRand++;
-                    playerMove();
-                }
-            } else if (radDir <= 100 && yRand + 1 < 10 && player.shots[yRand + 1][xRand] === true) {
+                } else { up = false; yRand = yRand + 1; addMiss(); playerMove(); }
+            } else if (player.matrix[yRand - 1][xRand] === true) { 
+                up = false;
+                botMove();
+            } else { yRand = yRand - 1; botMove(); }
+        }
+        else if (bottom && randShot < Math.floor(100 / count * 2)) {
+            if (player.shots[yRand + 1][xRand] === true) {
                 player.shots[yRand + 1][xRand] = false;
-                if (player.matrix[yRand + 1][xRand] === false) {
-                    yRand++;
-                    cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                yRand = yRand + 1;
+                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                if (player.matrix[yRand][xRand] === false) {
                     cell.classList.add("hitted");
+                    cell.style.backgroundColor = "rgb(159, 27, 27)";
                     let index = shipNow.cells.indexOf(cell);
                     shipNow.cells.splice(index, 1);
                     shipNow.hp -= 1;
                     if (shipNow.hp == 0) {
                         shipNow.div.classList.add("killed");
                         addShotsAroundDeadShip(player, shipNow);
-                        direct = null;
                         hit = false;
+                        right = true; up = true; left = true;
+                        shipNow.killed = true;
+                        if (player.ships.every(function (ship) { return ship.killed; })) {
+                            endGame(opponent);
+                        } 
+                        else setTimeout(botMove, 1000);
+                    }
+                    else {
+                        right = false; left = false;
                         setTimeout(botMove, 1000);
                     }
-                } else { 
-                    addMiss(); 
-                    yRand--;
-                    playerMove();
-                }
-            }
-        } else if (direct == "row") {
-            let radDir = Math.round(Math.random() * 100);
-            if (radDir < 50 && xRand - 1 > -1 && player.shots[yRand][xRand - 1] === true) {
-                player.shots[yRand][xRand - 1] = false;
-                if (player.matrix[yRand][xRand - 1] === false) {
-                    xRand--;
-                    cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
-                    cell.classList.add("hitted");
-                    cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                    let index = shipNow.cells.indexOf(cell);
-                    shipNow.cells.splice(index, 1);
-                    shipNow.hp -= 1;
-                    if (shipNow.hp == 0) {
-                        shipNow.div.classList.add("killed");
-                        addShotsAroundDeadShip(player, shipNow);
-                        direct = null;
-                        hit = false;
-                        setTimeout(botMove, 1000);
-                    }
-                } else { 
-                    addMiss(); 
-                    xRand++;
-                    playerMove();
-                }
-            } else if (radDir <= 100 && xRand + 1 < 10 && player.shots[yRand][xRand + 1] === true) {
+                } else { bottom = false; yRand = yRand - 1; addMiss(); playerMove(); }
+            } else if (player.matrix[yRand + 1][xRand] === true ) { 
+                bottom = false;
+                botMove();
+            } else { yRand = yRand + 1; botMove(); }
+        }
+        else if (right && randShot < Math.floor(100 / count * 3)) {
+            if (player.shots[yRand][xRand + 1] === true) {
                 player.shots[yRand][xRand + 1] = false;
-                if (player.matrix[yRand][xRand + 1] === false) {
-                    xRand++;
-                    cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                xRand = xRand + 1;
+                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                if (player.matrix[yRand][xRand] === false) {
                     cell.classList.add("hitted");
+                    cell.style.backgroundColor = "rgb(159, 27, 27)";
                     let index = shipNow.cells.indexOf(cell);
                     shipNow.cells.splice(index, 1);
                     shipNow.hp -= 1;
                     if (shipNow.hp == 0) {
                         shipNow.div.classList.add("killed");
                         addShotsAroundDeadShip(player, shipNow);
-                        direct = null;
                         hit = false;
+                        left = true; up = true; bottom = true;
+                        shipNow.killed = true;
+                        if (player.ships.every(function (ship) { return ship.killed; })) {
+                            endGame(opponent);
+                        } 
+                        else setTimeout(botMove, 1000);
+                    }
+                    else {
+                        up = false; bottom = false;
                         setTimeout(botMove, 1000);
                     }
-                } else { 
-                    addMiss(); 
-                    xRand--;
-                    playerMove();
-                }
-            }
+                } else { right = false; xRand = xRand - 1; addMiss(); playerMove(); }
+            } else if (player.matrix[yRand][xRand + 1] === true ) { 
+                right = false;
+                botMove();
+            } else { xRand = xRand + 1; botMove(); }
+        }
+        else if (left && randShot < 100) {
+            if (player.shots[yRand][xRand - 1] === true) {
+                player.shots[yRand][xRand - 1] = false;
+                xRand = xRand - 1;
+                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
+                if (player.matrix[yRand][xRand] === false) {
+                    cell.classList.add("hitted");
+                    cell.style.backgroundColor = "rgb(159, 27, 27)";
+                    let index = shipNow.cells.indexOf(cell);
+                    shipNow.cells.splice(index, 1);
+                    shipNow.hp -= 1;
+                    if (shipNow.hp == 0) {
+                        shipNow.div.classList.add("killed");
+                        addShotsAroundDeadShip(player, shipNow);
+                        hit = false;
+                        right = true; up = true; bottom = true;
+                        shipNow.killed = true;
+                        if (player.ships.every(function (ship) { return ship.killed; })) {
+                            endGame(opponent);
+                        } 
+                        else setTimeout(botMove, 1000);
+                    }
+                    else {
+                        up = false; bottom = false;
+                        setTimeout(botMove, 1000);
+                    }
+                } else { left = false; xRand = xRand + 1; addMiss(); playerMove(); }
+            } else if (player.matrix[yRand][xRand - 1] === true ) { 
+                left = false;
+                botMove();
+            } else { xRand = xRand - 1; botMove(); }
         }
     }
 }
@@ -268,114 +310,13 @@ function botMove() {
 function addMiss () {
     let miss = document.createElement("span");
     miss.style.zIndex = "1050";
-    miss.innerHTML = '\u00B7';
+    // miss.innerHTML = '\u00B7';
     cell.append(miss);
     helperMove.style.borderRight = "0px solid red";
     helperMove.style.borderLeft = "50px solid green";
 }
 
-function addRandBotShot () {
-    if (yRand - 1 > -1) {
-        if (player.shots[yRand - 1][xRand] === true || player.shots[yRand - 1][xRand] == null) {
-            player.shots[yRand - 1][xRand] = false; 
-            yRand = yRand - 1;
-            if (player.matrix[yRand][xRand] === false) {
-                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
-                cell.classList.add("hitted");
-                cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                let index = shipNow.cells.indexOf(cell);
-                shipNow.cells.splice(index, 1);
-                shipNow.hp -= 1;
-                if (shipNow.hp == 0) {
-                    shipNow.div.classList.add("killed");
-                    addShotsAroundDeadShip(player, shipNow);
-                    hit = false;
-                    setTimeout(botMove, 1000);
-                }
-                else {
-                    direct = "col";
-                    setTimeout(botMove, 1000);
-                }
-            } else { addMiss(); playerMove(); }
-        }
-    }
-    else if (yRand + 1 < 10) {
-        if (player.shots[yRand + 1][xRand] === true || player.shots[yRand + 1][xRand] == null) {
-            player.shots[yRand + 1][xRand] = false;
-            yRand = yRand + 1;
-            if (player.matrix[yRand][xRand] === false) {
-                cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
-                cell.classList.add("hitted");
-                cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                let index = shipNow.cells.indexOf(cell);
-                shipNow.cells.splice(index, 1);
-                shipNow.hp -= 1;
-                if (shipNow.hp == 0) {
-                    shipNow.div.classList.add("killed");
-                    addShotsAroundDeadShip(player, shipNow);
-                    hit = false;
-                    setTimeout(botMove, 1000);
-                }
-                else {
-                    direct = "col";
-                    setTimeout(botMove, 1000);
-                }
-            } else { addMiss(); playerMove(); }
-        }
-    }
-    else if (xRand + 1 < 10) {
-        if (player.shots[yRand][xRand + 1] === true || player.shots[yRand][xRand + 1] == null) {
-            player.shots[yRand][xRand + 1] = false;
-            xRand = xRand + 1;
-            if (player.matrix[yRand][xRand] === false) {
-                let cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
-                cell.classList.add("hitted");
-                cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                let index = shipNow.cells.indexOf(cell);
-                shipNow.cells.splice(index, 1);
-                shipNow.hp -= 1;
-                if (shipNow.hp == 0) {
-                    shipNow.div.classList.add("killed");
-                    addShotsAroundDeadShip(player, shipNow);
-                    hit = false;
-                    setTimeout(botMove, 1000);
-                }
-                else {
-                    direct = "row";
-                    setTimeout(botMove, 1000);
-                }
-            } else { addMiss(); playerMove(); }
-        }
-    }
-    else if (xRand - 1 > -1) {
-        if (player.shots[yRand][xRand - 1] === true || player.shots[yRand][xRand - 1] == null) {
-            player.shots[yRand][xRand - 1] = false;
-            xRand = xRand - 1;
-            if (player.matrix[yRand][xRand] === false) {
-                let cell = document.querySelectorAll(`[data-y="${yRand}"][data-x="${xRand}"]`)[0];
-                cell.classList.add("hitted");
-                cell.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                let index = shipNow.cells.indexOf(cell);
-                shipNow.cells.splice(index, 1);
-                shipNow.hp -= 1;
-                if (shipNow.hp == 0) {
-                    shipNow.div.classList.add("killed");
-                    addShotsAroundDeadShip(player, shipNow);
-                    hit = false;
-                    setTimeout(botMove, 1000);
-                }
-                else {
-                    direct = "row";
-                    setTimeout(botMove, 1000);
-                }
-            } else { addMiss(); playerMove(); }
-        }
-    }
-}
-
-
 function playerMove() {
-    console.log("Ход игрока");
     function shot(e) {
         if (e.button == 0 && e.target.classList.contains("battlefield-td")) {
             let cell = e.target;
@@ -384,19 +325,19 @@ function playerMove() {
             if(opponent.shots[y][x] == true) {
                 opponent.shots[y][x] = false;
                 if(opponent.matrix[y][x] === false) {
-                    let shipNow;
+                    let shipN;
                     for (let a = 0; a < opponent.ships.length; a++) {
                         if (opponent.ships[a].cells.indexOf(cell) > -1) {
-                            shipNow = opponent.ships[a];
-                            let index = shipNow.cells.indexOf(e.target);
-                            e.target.style.backgroundColor = "rgba(255, 0, 0, .5)";
-                            shipNow.cells.splice(index, 1);
-                            shipNow.hp -= 1;
-                            if (shipNow.hp == 0) {
-                                shipNow.killed = true;
-                                addShotsAroundDeadShip(opponent, shipNow);
+                            shipN = opponent.ships[a];
+                            let index = shipN.cells.indexOf(e.target);
+                            e.target.style.backgroundColor = "rgb(159, 27, 27)";
+                            shipN.cells.splice(index, 1);
+                            shipN.hp -= 1;
+                            if (shipN.hp == 0) {
+                                shipN.killed = true;
+                                addShotsAroundDeadShip(opponent, shipN);
                                 opponent.table.removeEventListener("click", shot);
-                                if (opponent.ships.every(function (ship) { return ship.killed === true })) {
+                                if (opponent.ships.every(function (ship) { return ship.killed; })) {
                                     opponent.table.removeEventListener("click", shot);
                                     endGame(player);
                                     break;
@@ -406,7 +347,7 @@ function playerMove() {
                                     break;
                                 }
                             } else {
-                                e.target.style.backgroundColor = "rgba(255, 0, 0, .5)";
+                                e.target.style.backgroundColor = "rgb(159, 27, 27)";
                                 opponent.table.removeEventListener("click", shot);
                                 playerMove();
                                 break;
@@ -416,7 +357,7 @@ function playerMove() {
                 } else {
                     let miss = document.createElement("span");
                     miss.style.zIndex = "550";
-                    miss.innerHTML = '\u00B7';
+                    // miss.innerHTML = '\u00B7';
                     cell.append(miss);
                     opponent.table.removeEventListener("click", shot);
                     helperMove.style.borderLeft = "0px solid green";
@@ -431,34 +372,64 @@ function playerMove() {
 }
 
 function addLevelToBot(count) {
-    let randX = Math.floor(Math.random() * 10);
-    let randY = Math.floor(Math.random() * 10);
-    if(player.matrix[randY][randX] && player.shots[randY][randX] != null) {
-        player.shots[randY][randX] = null;
-        count--;
-        if (count == 0) {
-            return true;
-        }
-        else {
+    if (count == 0) {
+        return true;
+    } else {
+        let randX = Math.floor(Math.random() * 10);
+        let randY = Math.floor(Math.random() * 10);
+        if(player.matrix[randY][randX] && player.shots[randY][randX] != null) {
+            player.shots[randY][randX] = null;
+            count--;
+            if (count == 0) {
+                return true;
+            }
+            else {
+                addLevelToBot(count);
+            }
+        } else {
             addLevelToBot(count);
         }
-    } else {
-        addLevelToBot(count);
     }
 }
 
 //При нажатии на кнопку "Играть против слабого"
 btnEasy.addEventListener("click", function () {
-    // prepareForGame();
-    // activeBot = "easy";
+    prepareForGame();
+    activeBot = "hard";
     //Случайным образом определяем, кто первый будет ходить
-    // let bone = Math.ceil(Math.random() * 100);
-    // if (bone > 50) {
-    //     botMove();
-    // }
-    // else {
-    //     playerMove();
-    // }
+    let bone = Math.ceil(Math.random() * 100);
+
+    level = 15;
+    addLevelToBot(level);
+
+    if (bone > 50) {
+        helperMove.style.borderRight = "50px solid red";
+        setTimeout(botMove, 1000);
+    }
+    else {
+        helperMove.style.borderLeft = "50px solid green";
+        playerMove();
+    }
+});
+
+//При нажатии на кнопку "Играть против среднего"
+btnMiddle.addEventListener("click", function () {
+    prepareForGame();
+    activeBot = "hard";
+    //Случайным образом определяем, кто первый будет ходить
+    let bone = Math.ceil(Math.random() * 100);
+
+    level = 30;
+    addLevelToBot(level);
+
+    if (bone > 50) {
+        helperMove.style.borderRight = "50px solid red";
+        setTimeout(botMove, 1000);
+    }
+    else {
+        helperMove.style.borderLeft = "50px solid green";
+        playerMove();
+    }
 });
 
 //При нажатии на кнопку "Играть против сильного"
@@ -468,20 +439,15 @@ btnHard.addEventListener("click", function () {
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
-    //Сюда надо создать массив, по которому бот будет ориентироваться, куда можно не стрелять
     level = 40;
     addLevelToBot(level);
-    console.log(player.shots);
 
     if (bone > 50) {
-        console.log("Бот ходит первым");
         helperMove.style.borderRight = "50px solid red";
         setTimeout(botMove, 1000);
     }
     else {
-        console.log("Игрок ходит первым");
         helperMove.style.borderLeft = "50px solid green";
         playerMove();
     }
 });
-// btnHard.click();
