@@ -98,6 +98,7 @@ body{
                             border: 1px solid rgba(0, 0, 0, .5);
                             cursor: pointer;
                             font-size: 14pt;
+                            transition: .5s all ease 0s;
                             .marker{
                                 position: absolute;
                                 width: 30px;
@@ -155,6 +156,7 @@ body{
                         background-color: rgba(0, 0, 255, .5);
                         z-index: 50;
                         cursor: move;
+                        transition: .5s all ease 0s;
                     }
                     .ship-pos-good{
                         outline: 3px solid rgb(0, 255, 0);

@@ -138,6 +138,8 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
   border: 1px solid rgba(0, 0, 0, 0.5);
   cursor: pointer;
   font-size: 14pt;
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .marker {
@@ -201,6 +203,8 @@ body .app .app-body div[data-side] .battlefield-dock .ship {
   background-color: rgba(0, 0, 255, 0.5);
   z-index: 50;
   cursor: move;
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-pos-good {
