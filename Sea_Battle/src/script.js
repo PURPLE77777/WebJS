@@ -439,7 +439,7 @@ btnHard.addEventListener("click", function () {
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
-    level = 45;
+    level = 50;
     addLevelToBot(level);
 
     if (bone > 50) {
