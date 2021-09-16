@@ -284,17 +284,22 @@ body .app .app-body div[data-side] .battlefield-dock .killed {
 }
 
 body .app .app-footer {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
   margin-top: 20px;
-  height: 100px;
+  width: 100%;
+  height: 75px;
   padding-top: 5px;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 body .app .app-footer .app-subtitle {
-  font-size: 13pt;
+  font-size: 16pt;
   color: white;
 }
 
 body .app .app-footer .app-subtitle .app-link {
   color: #ffe500;
+  margin-top: 30px;
 }
