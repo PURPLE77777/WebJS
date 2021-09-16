@@ -200,7 +200,7 @@ body .app .app-body div[data-side] .battlefield-dock {
 
 body .app .app-body div[data-side] .battlefield-dock .ship {
   outline: 3px solid blue;
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: #3d3dbd;
   z-index: 50;
   cursor: move;
   -webkit-transition: .5s all ease 0s;

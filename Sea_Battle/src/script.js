@@ -399,7 +399,7 @@ btnEasy.addEventListener("click", function () {
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
-    level = 15;
+    level = 20;
     addLevelToBot(level);
 
     if (bone > 50) {
@@ -419,7 +419,7 @@ btnMiddle.addEventListener("click", function () {
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
-    level = 30;
+    level = 35;
     addLevelToBot(level);
 
     if (bone > 50) {
@@ -439,7 +439,7 @@ btnHard.addEventListener("click", function () {
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
-    level = 40;
+    level = 45;
     addLevelToBot(level);
 
     if (bone > 50) {
