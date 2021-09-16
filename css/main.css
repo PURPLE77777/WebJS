@@ -203,8 +203,6 @@ body .app .app-body div[data-side] .battlefield-dock .ship {
   background-color: #3d3dbd;
   z-index: 50;
   cursor: move;
-  -webkit-transition: .5s all ease 0s;
-  transition: .5s all ease 0s;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-pos-good {

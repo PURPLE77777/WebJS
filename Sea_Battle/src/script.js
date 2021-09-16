@@ -10,6 +10,39 @@ let btnMiddle = document.querySelector('[data-computer="middle"]');
 let btnHard = document.querySelector('[data-computer="hard"]');
 let activeBot, levelArray, up = true, right = true, bottom = true, left = true;
 
+// function timer(swit) {
+//     let output = document.querySelector("output.timer"), timer, time = new Date();
+//     if (swit == "start") {
+//         timer = setInterval(function() {
+//             let date = new Date();
+//             let t = date.getTime() - time.getTime();
+//             let ms = t%1000; t-=ms; ms=Math.floor(ms/10);
+//             t = Math.floor (t/1000);
+//             let s = t%60; t-=s;
+//             t = Math.floor (t/60);
+//             let m = t%60; t-=m;
+//             if (m<10) m='0'+m;
+//             if (s<10) s='0'+s;
+//             if (ms<10) ms='0'+ms;
+//             output.value = m + ':' + s + '.' + ms;
+//         }, 10);
+//     }
+//     else if (swit == "stop") {
+//         let date = new Date();
+//         let t = date.getTime() - time.getTime();
+//         let ms = t%1000; t-=ms; ms=Math.floor(ms/10);
+//         t = Math.floor (t/1000);
+//         let s = t%60; t-=s;
+//         t = Math.floor (t/60);
+//         let m = t%60; t-=m;
+//         if (m<10) m='0'+m;
+//         if (s<10) s='0'+s;
+//         if (ms<10) ms='0'+ms;
+//         if (init==1) output.innerHTML = m + ':' + s + '.' + ms;
+//         output.innerHTML = date.getMinutes() + ":" + date.getSeconds() + ":" + date.getMilliseconds();
+//     }
+// }
+
 function prepareForGame () {
     //Убираем меню и отображаем подсказчика ходов
     menu.style.display = "none";
@@ -77,6 +110,7 @@ function addShotsAroundDeadShip(user, shipDead) {
 }
 
 function endGame (winner) {
+    // timer("stop");
     helperMove.style.borderRight = "0px solid red";
     helperMove.style.borderLeft = "0px solid green";
     helperMove.style.display = "none";
@@ -402,6 +436,8 @@ btnEasy.addEventListener("click", function () {
     level = 20;
     addLevelToBot(level);
 
+    // timer("start");
+
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";
         setTimeout(botMove, 1000);
@@ -422,6 +458,8 @@ btnMiddle.addEventListener("click", function () {
     level = 35;
     addLevelToBot(level);
 
+    // timer("start");
+
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";
         setTimeout(botMove, 1000);
@@ -441,6 +479,8 @@ btnHard.addEventListener("click", function () {
 
     level = 50;
     addLevelToBot(level);
+
+    // timer("start");
 
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";

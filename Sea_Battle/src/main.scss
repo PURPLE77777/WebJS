@@ -14,6 +14,14 @@ body{
                 color: white;
             }
         }
+        // .timer{
+        //     display: block;
+        //     position: absolute;
+        //     right: 40%;
+        //     margin-top: 20px;
+        //     width: 150px;
+        //     height: 30px;
+        // }
         .app-body{
             display: flex;
             flex-wrap: nowrap;
@@ -156,7 +164,6 @@ body{
                         background-color: rgb(61, 61, 189);
                         z-index: 50;
                         cursor: move;
-                        transition: .5s all ease 0s;
                     }
                     .ship-pos-good{
                         outline: 3px solid rgb(0, 255, 0);
