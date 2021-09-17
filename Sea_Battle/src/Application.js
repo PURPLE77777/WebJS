@@ -313,5 +313,7 @@ class Application {
             });
             checkReady();
         }
+
+        // btnRandomize.click();
     }
 }

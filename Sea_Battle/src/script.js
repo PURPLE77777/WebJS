@@ -9,39 +9,118 @@ let btnEasy = document.querySelector('[data-computer="easy"]');
 let btnMiddle = document.querySelector('[data-computer="middle"]');
 let btnHard = document.querySelector('[data-computer="hard"]');
 let activeBot, levelArray, up = true, right = true, bottom = true, left = true;
+let btnCont = document.querySelector("button.continue");
 
-// function timer(swit) {
-//     let output = document.querySelector("output.timer"), timer, time = new Date();
-//     if (swit == "start") {
-//         timer = setInterval(function() {
-//             let date = new Date();
-//             let t = date.getTime() - time.getTime();
-//             let ms = t%1000; t-=ms; ms=Math.floor(ms/10);
-//             t = Math.floor (t/1000);
-//             let s = t%60; t-=s;
-//             t = Math.floor (t/60);
-//             let m = t%60; t-=m;
-//             if (m<10) m='0'+m;
-//             if (s<10) s='0'+s;
-//             if (ms<10) ms='0'+ms;
-//             output.value = m + ':' + s + '.' + ms;
-//         }, 10);
-//     }
-//     else if (swit == "stop") {
-//         let date = new Date();
-//         let t = date.getTime() - time.getTime();
-//         let ms = t%1000; t-=ms; ms=Math.floor(ms/10);
-//         t = Math.floor (t/1000);
-//         let s = t%60; t-=s;
-//         t = Math.floor (t/60);
-//         let m = t%60; t-=m;
-//         if (m<10) m='0'+m;
-//         if (s<10) s='0'+s;
-//         if (ms<10) ms='0'+ms;
-//         if (init==1) output.innerHTML = m + ':' + s + '.' + ms;
-//         output.innerHTML = date.getMinutes() + ":" + date.getSeconds() + ":" + date.getMilliseconds();
-//     }
-// }
+btnCont.addEventListener("click", function () {
+    opponent.table.addEventListener("click", shot);
+    eventBlock.style.display = "none";
+    result.style.display = "none";
+    menu.style.display = "block";
+    helperMove.style.display = "none";
+    player.dock.style.visibility = "hidden";
+    opponent.dock.style.visibility = "hidden";
+    let cells = document.getElementsByTagName("td");
+    for (let x = 0; x < cells.length; x++) {
+        cells[x].style.cursor = "pointer";
+        cells[x].style.backgroundColor = "#e1e4ff";
+        cells[x].classList.remove("hitted");
+    }
+    let misses = document.querySelectorAll("span.miss");
+    for (let x = 0; x < misses.length; x++) {
+        misses[x].remove();
+    }
+    let cell = cells[0].getBoundingClientRect();
+    player.ships.forEach(function (ship) {
+        ship.div.style.position = "static";
+        ship.div.style.zIndex = "50";
+        ship.div.style.cursor = "move";
+        ship.div.classList.remove("killed");
+        ship.div.removeAttribute("style");
+        ship.killed = false;
+        ship.ready = false;
+        ship.cell = null;
+        ship.canChangePosition = true;
+        ship.hp = ship.size;
+        ship.div.style.height = cell.height + "px";
+        ship.div.style.width = cell.width * ship.size + "px";
+        ship.direction = "row";
+    });
+    opponent.ships.forEach(function (ship) {
+        ship.div.style.position = "static";
+        ship.div.style.zIndex = "50";
+        ship.div.style.cursor = "default";
+        ship.div.classList.remove("killed");
+        ship.div.removeAttribute("style");
+        ship.killed = false;
+        ship.ready = false;
+        ship.cell = null;
+        ship.canChangePosition = true;
+        ship.hp = ship.size;
+        ship.div.style.height = cell.height + "px";
+        ship.div.style.width = cell.width * ship.size + "px";
+        ship.direction = "row";
+    });
+    for (let y = 0; y < player.matrix.length; y++) {
+        for (let x = 0; x < player.matrix[y].length; x++) {
+            player.matrix[y][x] = true;
+        }
+    }
+    for (let y = 0; y < opponent.matrix.length; y++) {
+        for (let x = 0; x < opponent.matrix[y].length; x++) {
+            opponent.matrix[y][x] = true;
+        }
+    }
+    for (let y = 0; y < player.shots.length; y++) {
+        for (let x = 0; x < player.shots[y].length; x++) {
+            player.shots[y][x] = true;
+        }
+    }
+    for (let y = 0; y < opponent.shots.length; y++) {
+        for (let x = 0; x < opponent.shots[y].length; x++) {
+            opponent.shots[y][x] = true;
+        }
+    }
+    player.readyToGame = false;
+    opponent.readyToGame = false;
+    btnEasy.setAttribute("disabled", "true");
+    btnMiddle.setAttribute("disabled", "true");
+    btnHard.setAttribute("disabled", "true");
+});
+
+let timerGame, time;
+function timer(swit) {
+    let output = document.querySelector("output.timer");
+    if (swit == "start") {
+        time = new Date();
+        timerGame = setInterval(function() {
+            let date = new Date();
+            let t = date.getTime() - time.getTime();
+            let ms = t%1000; t-=ms; ms=Math.floor(ms/100);
+            t = Math.floor (t/1000);
+            let s = t%60; t-=s;
+            t = Math.floor (t/60);
+            let m = t%60; t-=m;
+            if (m < 10) m = '0' + m;
+            if (s < 10) s = '0' + s;
+            // if (ms < 10) ms = '0' + ms;
+            output.value = m + ':' + s + '.' + ms;
+        }, 100);
+    }
+    else if (swit == "stop") {
+        clearInterval(timerGame);
+        let date = new Date();
+        let t = date.getTime() - time.getTime();
+        let ms = t % 1000; t-=ms; ms=Math.floor(ms / 100);
+        t = Math.floor (t / 1000);
+        let s = t % 60; t-=s;
+        t = Math.floor (t / 60);
+        let m = t % 60; t-=m;
+        if (m < 10) m = '0' + m;
+        if (s < 10) s = '0' + s;
+        // if (ms < 10) ms = '0' + ms;
+        output.value = m + ':' + s + '.' + ms;
+    }
+}
 
 function prepareForGame () {
     //Убираем меню и отображаем подсказчика ходов
@@ -92,8 +171,7 @@ function addShotsAroundDeadShip(user, shipDead) {
                         user.shots[dy][dx] = false;
                         let cell = user.cells[dy][dx];
                         let miss = document.createElement("span");
-                        miss.style.zIndex = "1050";
-                        // miss.innerHTML = '\u00B7';
+                        miss.classList.add("miss");
                         cell.append(miss);
                         countSup++;
                     }
@@ -110,44 +188,40 @@ function addShotsAroundDeadShip(user, shipDead) {
 }
 
 function endGame (winner) {
-    // timer("stop");
+    timer("stop");
     helperMove.style.borderRight = "0px solid red";
     helperMove.style.borderLeft = "0px solid green";
     helperMove.style.display = "none";
     result.style.display = "block";
     player.ships.forEach(function (ship) {
+        ship.div.style.zIndex = "1050";
         if (ship.killed == false) {
-            ship.div.style.zIndex = "1050";
+            ship.cells.forEach(function (cell) {
+                if (!(cell.classList.contains("hitted"))) cell.style.zIndex = "auto";
+            });
         }
         else {
-            ship.cells.forEach(function (cell) {
-                cell.style.zIndex = "auto";
-            });
-            cell.style.backgroundColor = "#e1e4ff";
-            ship.div.style.zIndex = "1050";
-            ship.div.style.outline = "3px solid rgb(255, 0, 0)";
-            ship.div.style.backgroundColor = "rgba(255, 0, 0, .5)";
+            ship.div.style.zIndex = "1500";
+            ship.div.style.backgroundColor = "rgb(181, 73, 73)";
         }
     });
+    opponent.dock.style.visibility = "visible";
     opponent.ships.forEach(function (ship) {
+        ship.div.style.zIndex = "1050";
         if (ship.killed == false) {
-            ship.div.style.zIndex = "1050";
+            ship.cells.forEach(function (cell) {
+                if (!(cell.classList.contains("hitted"))) cell.style.zIndex = "auto";
+            });
         }
         else {
-            ship.cells.forEach(function (cell) {
-                cell.style.zIndex = "auto";
-            });
-            cell.style.backgroundColor = "#e1e4ff";
-            ship.div.style.zIndex = "1050";
-            ship.div.style.outline = "3px solid rgb(255, 0, 0)";
-            ship.div.style.background = "rgba(255, 0, 0, .5)";
+            ship.div.style.zIndex = "1500";
+            ship.div.style.backgroundColor = "rgb(181, 73, 73)";
         }
     });
     if (winner == player) {
         result.style.background = 'url("../Sea_Battle/img/win.png") round';
     } else {
         result.style.background = 'url("../Sea_Battle/img/lose.png") round';
-        opponent.dock.style.visibility = "visible";
     }
 }
 
@@ -343,6 +417,7 @@ function botMove() {
 
 function addMiss () {
     let miss = document.createElement("span");
+    miss.classList.add("miss");
     miss.style.zIndex = "1050";
     // miss.innerHTML = '\u00B7';
     cell.append(miss);
@@ -350,58 +425,62 @@ function addMiss () {
     helperMove.style.borderLeft = "50px solid green";
 }
 
-function playerMove() {
-    function shot(e) {
-        if (e.button == 0 && e.target.classList.contains("battlefield-td")) {
-            let cell = e.target;
-            let x = Number(e.target.getAttribute("data-x"));
-            let y = Number(e.target.getAttribute("data-y"));
-            if(opponent.shots[y][x] == true) {
-                opponent.shots[y][x] = false;
-                if(opponent.matrix[y][x] === false) {
-                    let shipN;
-                    for (let a = 0; a < opponent.ships.length; a++) {
-                        if (opponent.ships[a].cells.indexOf(cell) > -1) {
-                            shipN = opponent.ships[a];
-                            let index = shipN.cells.indexOf(e.target);
-                            e.target.style.backgroundColor = "rgb(159, 27, 27)";
-                            shipN.cells.splice(index, 1);
-                            shipN.hp -= 1;
-                            if (shipN.hp == 0) {
-                                shipN.killed = true;
-                                addShotsAroundDeadShip(opponent, shipN);
+function shot(e) {
+    if (e.button == 0 && e.target.classList.contains("battlefield-td")) {
+        let cell = e.target;
+        let x = Number(e.target.getAttribute("data-x"));
+        let y = Number(e.target.getAttribute("data-y"));
+        if(opponent.shots[y][x] == true) {
+            opponent.shots[y][x] = false;
+            if(opponent.matrix[y][x] === false) {
+                let shipN;
+                for (let a = 0; a < opponent.ships.length; a++) {
+                    if (opponent.ships[a].cells.indexOf(cell) > -1) {
+                        shipN = opponent.ships[a];
+                        let index = shipN.cells.indexOf(e.target);
+                        shipN.cells.splice(index, 1);
+                        shipN.hp -= 1;
+                        if (shipN.hp == 0) {
+                            shipN.killed = true;
+                            shipN.div.classList.add("killed");
+                            e.target.removeAttribute("style");
+                            e.target.classList.add("hitted");
+                            addShotsAroundDeadShip(opponent, shipN);
+                            opponent.table.removeEventListener("click", shot);
+                            if (opponent.ships.every(function (ship) { return ship.killed; })) {
                                 opponent.table.removeEventListener("click", shot);
-                                if (opponent.ships.every(function (ship) { return ship.killed; })) {
-                                    opponent.table.removeEventListener("click", shot);
-                                    endGame(player);
-                                    break;
-                                } else {
-                                    opponent.table.removeEventListener("click", shot);
-                                    playerMove();
-                                    break;
-                                }
+                                endGame(player);
+                                break;
                             } else {
-                                e.target.style.backgroundColor = "rgb(159, 27, 27)";
                                 opponent.table.removeEventListener("click", shot);
                                 playerMove();
                                 break;
                             }
-                        } 
-                    }
-                } else {
-                    let miss = document.createElement("span");
-                    miss.style.zIndex = "550";
-                    // miss.innerHTML = '\u00B7';
-                    cell.append(miss);
-                    opponent.table.removeEventListener("click", shot);
-                    helperMove.style.borderLeft = "0px solid green";
-                    helperMove.style.borderRight = "50px solid red";
-                    opponent.table.removeEventListener("click", shot);
-                    setTimeout(botMove, 1000);
+                        } else {
+                            e.target.removeAttribute("style");
+                            e.target.classList.add("hitted");
+                            opponent.table.removeEventListener("click", shot);
+                            playerMove();
+                            break;
+                        }
+                    } 
                 }
+            } else {
+                let miss = document.createElement("span");
+                miss.classList.add("miss");
+                miss.style.zIndex = "550";
+                // miss.innerHTML = '\u00B7';
+                cell.append(miss);
+                opponent.table.removeEventListener("click", shot);
+                helperMove.style.borderLeft = "0px solid green";
+                helperMove.style.borderRight = "50px solid red";
+                opponent.table.removeEventListener("click", shot);
+                setTimeout(botMove, 1000);
             }
         }
     }
+}
+function playerMove() {
     opponent.table.addEventListener("click", shot);
 }
 
@@ -436,7 +515,7 @@ btnEasy.addEventListener("click", function () {
     level = 20;
     addLevelToBot(level);
 
-    // timer("start");
+    timer("start");
 
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";
@@ -458,7 +537,7 @@ btnMiddle.addEventListener("click", function () {
     level = 35;
     addLevelToBot(level);
 
-    // timer("start");
+    timer("start");
 
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";
@@ -480,7 +559,7 @@ btnHard.addEventListener("click", function () {
     level = 50;
     addLevelToBot(level);
 
-    // timer("start");
+    timer("start");
 
     if (bone > 50) {
         helperMove.style.borderRight = "50px solid red";
@@ -491,3 +570,6 @@ btnHard.addEventListener("click", function () {
         playerMove();
     }
 });
+
+// btnHard.click();
+// endGame(opponent);

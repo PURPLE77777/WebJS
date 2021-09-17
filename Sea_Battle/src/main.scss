@@ -1,27 +1,21 @@
 body{
-    text-align: center;
     user-select: none;
     overflow: hidden;
     margin: 0px;
+    font-family: 'Bebas Neue', cursive;
     .app{
         background: url(../Sea_Battle/img/battleship.jpg) center no-repeat;
         background-size: cover;
         .app-header{
             padding: 20px 0px 20px 0px;
             background-color: rgba(0, 0, 0, .5);
+            text-align: center;
+            width: 100%;
             .app-title{
                 margin: 0px;
                 color: white;
             }
         }
-        // .timer{
-        //     display: block;
-        //     position: absolute;
-        //     right: 40%;
-        //     margin-top: 20px;
-        //     width: 150px;
-        //     height: 30px;
-        // }
         .app-body{
             display: flex;
             flex-wrap: nowrap;
@@ -29,13 +23,16 @@ body{
             margin-top: 60px;
             .menu{
                 width: 350px;
+                padding-top: 20px;
+                text-align: center;
                 .btn{
-                    margin: 5px 0px;
-                    padding: 10px;
-                    font-size: 12pt;
-                    width: 250px;
+                    margin: 10px 0px;
+                    padding: 11px;
+                    font-size: 14pt;
+                    width: 286px;
                     cursor: pointer;
                     border-radius: 20px;
+                    font-family: 'Bebas Neue', cursive;
                 }
                 button[data-computer="easy"]{
                     transition: .5s all ease 0s;
@@ -59,23 +56,37 @@ body{
                     transition: .5s all ease 0s;
                 }
                 button[data-action="manually"]:hover{
+                    color: white;
                     background: url(../Sea_Battle/img/manual.gif) center no-repeat;
                     background-size: cover;
+                    text-shadow: 0px 0px 10px white;
+                    box-shadow: inset 0px 0px 60px 0px black;
                 }
                 button[data-action="randomize"]{
                     transition: .5s all ease 0s;
                 }
                 button[data-action="randomize"]:hover{
+                    color: white;
                     background: url(../Sea_Battle/img/random.gif) center no-repeat;
+                    text-shadow: 0px 0px 10px white;
+                    box-shadow: inset 0px 0px 60px 0px black;
                     background-size: cover;
                 }
             }
             .event{
+                text-align: center;
                 display: none;
                 width: 350px;
+                .timer{
+                    display: block;
+                    margin: 0px auto;
+                    width: 150px;
+                    height: 30px;
+                    font-size: 18pt;
+                }
                 .helper-move{
                     display: none;
-                    margin: 120px 0px 0px 150px;
+                    margin: 140px 0px 0px 150px;
                     width: 0px;
                     border-top: 30px solid transparent;
                     border-bottom: 30px solid transparent;
@@ -89,19 +100,50 @@ body{
                     width: 80%;
                     height: 250px;
                 }
+                .continue{
+                    display: block;
+                    position: relative;
+                    margin: 0px auto;
+                    padding: 15px 0px;
+                    font-size: 14pt;
+                    width: 180px;
+                    height: 64px;
+                    bottom: calc(-100% - 20px);
+                    border: 2px solid darkblue;
+                    border-radius: 45%;
+                    transition: 1.5s ease 0s;
+                    cursor: pointer;
+                    font-weight: bold;
+                    background: url(../Sea_Battle/img/bgSea.png);
+                    background-repeat: repeat-x;
+                    background-size: 250px 150px;
+                    background-position: 0px 20px;
+                    font-family: 'Bebas Neue', cursive;
+                }
+                .continue:hover{
+                    color: white;
+                    text-shadow: 0px;
+                    background-position: 150px -70px;
+                    .continue_text{
+                        text-shadow: 0px 0px 10px white;
+                    }
+                }
             }
             div[data-side]{
+                margin-left: 40px;
                 .battlefield-table{
                     width: 100%;
-                    z-index: 1000;
+                    // z-index: 1000;
+                    text-align: center;
                     border-spacing: 0px;
                     border: 1px solid rgba(0, 0, 0, .5);
+                    box-shadow: -15px -15px 15px 30px #e1e4ff;
                     .battlefield-tr{
                         .battlefield-td{
                             position: relative;
                             padding: 0px;
-                            width: 30px;
-                            height: 30px;
+                            width: 38px;
+                            height: 38px;
                             background-color: #e1e4ff;
                             border: 1px solid rgba(0, 0, 0, .5);
                             cursor: pointer;
@@ -116,15 +158,16 @@ body{
                             }
                             .marker-col{
                                 top: -30px;
+                                left: 5px;
                             }
                             .marker-row{
                                 left: -40px;
-                                top: 3px;
+                                top: 5px;
                             }
-                            span{
+                            .miss{
                                 font-size: 40pt;
-                                height: 30px;
-                                width: 30px;
+                                height: 100%;
+                                width: 100%;
                                 top: 0px;
                                 left: 0px;
                                 position: absolute;
@@ -136,7 +179,7 @@ body{
                             background-color: #d1c3c3;
                         }
                         .hitted{
-                            z-index: 1000;
+                            z-index: 1500;
                             background-color: rgb(159, 27, 27);
                         }
                         .hitted:hover{
@@ -154,7 +197,7 @@ body{
                     // background-size: cover;
                     grid-template-columns: repeat(5, 0px);
                     grid-template-rows: repeat(4, 0px);
-                    gap: 50px 40px;
+                    gap: 60px 50px;
                     grid-template-areas: "ship-row-4-0 . . . . "
                                          "ship-row-3-1 . . ship-row-3-2 ."
                                          "ship-row-2-3 . ship-row-2-4 . ship-row-2-5"
@@ -209,6 +252,7 @@ body{
                     }
                     .killed{
                         outline: 3px solid rgb(255, 0, 0);
+                        background-color: rgb(181, 73, 73);
                     }
                 }
             }
@@ -221,6 +265,7 @@ body{
             width: 100%;
             height: 75px;
             padding-top: 5px;
+            text-align: center;
             background-color: rgba(0, 0, 0, .5);
             .app-subtitle{
                 font-size: 16pt;
