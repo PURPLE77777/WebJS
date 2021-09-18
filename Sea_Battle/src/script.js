@@ -224,9 +224,9 @@ function endGame (winner) {
         }
     });
     if (winner == player) {
-        result.style.background = 'url(../Sea_Battle/img/win.png) round';
+        result.style.background = 'url(../img/win.png) round';
     } else {
-        result.style.background = 'url(../Sea_Battle/img/lose.png) round';
+        result.style.background = 'url(../img/lose.png) round';
     }
 }
 
