@@ -6,6 +6,7 @@ body {
   overflow: hidden;
   margin: 0px;
   font-family: 'Bebas Neue', cursive;
+  zoom: 100%;
 }
 
 body .app {
