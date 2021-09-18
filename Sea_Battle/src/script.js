@@ -24,6 +24,7 @@ btnCont.addEventListener("click", function () {
         cells[x].style.cursor = "pointer";
         cells[x].style.backgroundColor = "#e1e4ff";
         cells[x].classList.remove("hitted");
+        cells[x].removeAttribute("style");
     }
     let misses = document.querySelectorAll("span.miss");
     for (let x = 0; x < misses.length; x++) {
