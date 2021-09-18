@@ -8,7 +8,7 @@ let result = document.getElementsByClassName("winner")[0];
 let btnEasy = document.querySelector('[data-computer="easy"]');
 let btnMiddle = document.querySelector('[data-computer="middle"]');
 let btnHard = document.querySelector('[data-computer="hard"]');
-let activeBot, levelArray, up = true, right = true, bottom = true, left = true;
+let up = true, right = true, bottom = true, left = true;
 let btnCont = document.querySelector("button.continue");
 
 btnCont.addEventListener("click", function () {
@@ -19,6 +19,8 @@ btnCont.addEventListener("click", function () {
     helperMove.style.display = "none";
     player.dock.style.visibility = "hidden";
     opponent.dock.style.visibility = "hidden";
+    let statOpponent = document.querySelector("div.statistics");
+    statOpponent.remove();
     let cells = document.getElementsByTagName("td");
     for (let x = 0; x < cells.length; x++) {
         cells[x].style.cursor = "pointer";
@@ -40,6 +42,7 @@ btnCont.addEventListener("click", function () {
         ship.killed = false;
         ship.ready = false;
         ship.cell = null;
+        ship.cells = [];
         ship.canChangePosition = true;
         ship.hp = ship.size;
         ship.div.style.height = cell.height + "px";
@@ -55,6 +58,7 @@ btnCont.addEventListener("click", function () {
         ship.killed = false;
         ship.ready = false;
         ship.cell = null;
+        ship.cells = [];
         ship.canChangePosition = true;
         ship.hp = ship.size;
         ship.div.style.height = cell.height + "px";
@@ -220,9 +224,9 @@ function endGame (winner) {
         }
     });
     if (winner == player) {
-        result.style.background = 'url("../Sea_Battle/img/win.png") round';
+        result.style.background = 'url(../Sea_Battle/img/win.png) round';
     } else {
-        result.style.background = 'url("../Sea_Battle/img/lose.png") round';
+        result.style.background = 'url(../Sea_Battle/img/lose.png) round';
     }
 }
 
@@ -448,6 +452,7 @@ function shot(e) {
                             e.target.classList.add("hitted");
                             addShotsAroundDeadShip(opponent, shipN);
                             opponent.table.removeEventListener("click", shot);
+                            app.updateStatOp();
                             if (opponent.ships.every(function (ship) { return ship.killed; })) {
                                 opponent.table.removeEventListener("click", shot);
                                 endGame(player);
@@ -509,12 +514,17 @@ function addLevelToBot(count) {
 //При нажатии на кнопку "Играть против слабого"
 btnEasy.addEventListener("click", function () {
     prepareForGame();
-    activeBot = "hard";
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
     level = 20;
     addLevelToBot(level);
+
+    app.createStatBlockOpponent();
+    app.updateStatOp();
+
+    let promp = document.querySelector("span.dock-promp");
+    promp.style.visibility = "hidden";
 
     timer("start");
 
@@ -531,12 +541,17 @@ btnEasy.addEventListener("click", function () {
 //При нажатии на кнопку "Играть против среднего"
 btnMiddle.addEventListener("click", function () {
     prepareForGame();
-    activeBot = "hard";
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
     level = 35;
     addLevelToBot(level);
+
+    app.createStatBlockOpponent();
+    app.updateStatOp();
+
+    let promp = document.querySelector("span.dock-promp");
+    promp.style.visibility = "hidden";
 
     timer("start");
 
@@ -553,12 +568,17 @@ btnMiddle.addEventListener("click", function () {
 //При нажатии на кнопку "Играть против сильного"
 btnHard.addEventListener("click", function () {
     prepareForGame();
-    activeBot = "hard";
     //Случайным образом определяем, кто первый будет ходить
     let bone = Math.ceil(Math.random() * 100);
 
     level = 50;
     addLevelToBot(level);
+
+    app.createStatBlockOpponent();
+    app.updateStatOp();
+
+    let promp = document.querySelector("span.dock-promp");
+    promp.style.visibility = "hidden";
 
     timer("start");
 
@@ -571,6 +591,3 @@ btnHard.addEventListener("click", function () {
         playerMove();
     }
 });
-
-// btnHard.click();
-// endGame(opponent);

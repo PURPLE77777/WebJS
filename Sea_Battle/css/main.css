@@ -1,22 +1,31 @@
 body {
-  text-align: center;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   overflow: hidden;
+  margin: 0px;
+  font-family: 'Bebas Neue', cursive;
+}
+
+body .app {
+  background: url(../img/battleship.jpg) center no-repeat;
+  background-size: cover;
 }
 
 body .app .app-header {
-  margin-top: 40px;
+  padding: 20px 0px 20px 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
 }
 
 body .app .app-header .app-title {
   margin: 0px;
+  color: white;
 }
 
 body .app .app-body {
-  min-width: 1520px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -30,24 +39,95 @@ body .app .app-body {
 
 body .app .app-body .menu {
   width: 350px;
+  padding-top: 20px;
+  text-align: center;
 }
 
 body .app .app-body .menu .btn {
-  margin: 5px 0px;
-  padding: 10px;
-  font-size: 12pt;
-  width: 250px;
+  margin: 10px 0px;
+  padding: 11px;
+  font-size: 14pt;
+  width: 286px;
   cursor: pointer;
+  border-radius: 20px;
+  font-family: 'Bebas Neue', cursive;
+}
+
+body .app .app-body .menu button[data-computer="easy"] {
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+body .app .app-body .menu button[data-computer="easy"]:hover {
+  -webkit-box-shadow: inset 0px 0px 20px 10px green;
+          box-shadow: inset 0px 0px 20px 10px green;
+}
+
+body .app .app-body .menu button[data-computer="middle"] {
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+body .app .app-body .menu button[data-computer="middle"]:hover {
+  -webkit-box-shadow: inset 0px 0px 20px 10px yellow;
+          box-shadow: inset 0px 0px 20px 10px yellow;
+}
+
+body .app .app-body .menu button[data-computer="hard"] {
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+body .app .app-body .menu button[data-computer="hard"]:hover {
+  -webkit-box-shadow: inset 0px 0px 20px 10px red;
+          box-shadow: inset 0px 0px 20px 10px red;
+}
+
+body .app .app-body .menu button[data-action="manually"] {
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+body .app .app-body .menu button[data-action="manually"]:hover {
+  color: white;
+  background: url(../img/manual.gif) center no-repeat;
+  background-size: cover;
+  text-shadow: 0px 0px 10px white;
+  -webkit-box-shadow: inset 0px 0px 60px 0px black;
+          box-shadow: inset 0px 0px 60px 0px black;
+}
+
+body .app .app-body .menu button[data-action="randomize"] {
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+body .app .app-body .menu button[data-action="randomize"]:hover {
+  color: white;
+  background: url(../img/random.gif) center no-repeat;
+  text-shadow: 0px 0px 10px white;
+  -webkit-box-shadow: inset 0px 0px 60px 0px black;
+          box-shadow: inset 0px 0px 60px 0px black;
+  background-size: 105% 500%;
 }
 
 body .app .app-body .event {
+  text-align: center;
   display: none;
   width: 350px;
 }
 
+body .app .app-body .event .timer {
+  display: block;
+  margin: 0px auto;
+  width: 150px;
+  height: 30px;
+  font-size: 18pt;
+}
+
 body .app .app-body .event .helper-move {
   display: none;
-  margin: 120px 0px 0px 150px;
+  margin: 140px 0px 0px 150px;
   width: 0px;
   border-top: 30px solid transparent;
   border-bottom: 30px solid transparent;
@@ -64,22 +144,62 @@ body .app .app-body .event .winner {
   height: 250px;
 }
 
+body .app .app-body .event .continue {
+  display: block;
+  position: relative;
+  margin: 0px auto;
+  padding: 15px 0px;
+  font-size: 14pt;
+  width: 180px;
+  height: 64px;
+  bottom: calc(-100% - 20px);
+  border: 2px solid darkblue;
+  border-radius: 45%;
+  -webkit-transition: 1.5s ease 0s;
+  transition: 1.5s ease 0s;
+  cursor: pointer;
+  font-weight: bold;
+  background: url(../img/bgSea.png);
+  background-repeat: repeat-x;
+  background-size: 250px 150px;
+  background-position: 0px 20px;
+  font-family: 'Bebas Neue', cursive;
+}
+
+body .app .app-body .event .continue:hover {
+  color: white;
+  text-shadow: 0px;
+  background-position: 150px -70px;
+}
+
+body .app .app-body .event .continue:hover .continue_text {
+  text-shadow: 0px 0px 10px white;
+}
+
+body .app .app-body div[data-side] {
+  margin-left: 40px;
+}
+
 body .app .app-body div[data-side] .battlefield-table {
   width: 100%;
-  z-index: 1000;
+  text-align: center;
   border-spacing: 0px;
   border: 1px solid rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: -15px -15px 15px 30px #e1e4ff;
+          box-shadow: -15px -15px 15px 30px #e1e4ff;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td {
   position: relative;
   padding: 0px;
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
   background-color: #e1e4ff;
   border: 1px solid rgba(0, 0, 0, 0.5);
   cursor: pointer;
   font-size: 14pt;
+  -webkit-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .marker {
@@ -87,24 +207,28 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
   width: 30px;
   height: 30px;
   cursor: default;
+  font-weight: bold;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .marker-col {
   top: -30px;
+  left: 5px;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .marker-row {
   left: -40px;
-  top: 3px;
+  top: 5px;
 }
 
-body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td span {
+body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td .miss {
   font-size: 40pt;
-  height: 30px;
-  width: 30px;
-  top: -15px;
+  height: 100%;
+  width: 100%;
+  top: 0px;
   left: 0px;
   position: absolute;
+  background: url(../img/waves.png) center no-repeat;
+  background-size: cover;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefield-td:hover {
@@ -112,12 +236,12 @@ body .app .app-body div[data-side] .battlefield-table .battlefield-tr .battlefie
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted {
-  z-index: 1000;
-  background-color: rgba(255, 0, 0, 0.5);
+  z-index: 1500;
+  background-color: #9f1b1b;
 }
 
 body .app .app-body div[data-side] .battlefield-table .battlefield-tr .hitted:hover {
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: #9f1b1b;
 }
 
 body .app .app-body div[data-side] .battlefield-dock {
@@ -125,19 +249,35 @@ body .app .app-body div[data-side] .battlefield-dock {
   display: -ms-grid;
   display: grid;
   margin-top: 30px;
-  width: 300px;
-  height: 200px;
   -ms-grid-columns: (0px)[5];
       grid-template-columns: repeat(5, 0px);
-  -ms-grid-rows: (0px)[4];
-      grid-template-rows: repeat(4, 0px);
-  gap: 50px 40px;
-      grid-template-areas: "ship-row-4-0 . . . . " "ship-row-3-1 . . ship-row-3-2 ." "ship-row-2-3 . ship-row-2-4 . ship-row-2-5" "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
+  -ms-grid-rows: (0px)[5];
+      grid-template-rows: repeat(5, 0px);
+  gap: 60px 50px;
+      grid-template-areas: "dock-promp . . . . "
+ "ship-row-4-0 . . . . "
+ "ship-row-3-1 . . ship-row-3-2 ."
+ "ship-row-2-3 . ship-row-2-4 . ship-row-2-5"
+ "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
+}
+
+body .app .app-body div[data-side] .battlefield-dock .dock-promp{
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: dock-promp;
+  display: block;
+  width: 352px;
+  height: 52px;
+  font-size: 13pt;
+  padding: 0px 24px;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: inset 0px 0px 20px 20px white;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship {
   outline: 3px solid blue;
-  background-color: rgba(0, 0, 255, 0.5);
+  background-color: #3d3dbd;
   z-index: 50;
   cursor: move;
 }
@@ -157,74 +297,174 @@ body .app .app-body div[data-side] .battlefield-dock .ship-pos-bad {
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-4-0 {
-  -ms-grid-row: 1;
+  -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: ship-row-4-0;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-3-1 {
-  -ms-grid-row: 2;
+  -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: ship-row-3-1;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-3-2 {
-  -ms-grid-row: 2;
+  -ms-grid-row: 3;
   -ms-grid-column: 4;
   grid-area: ship-row-3-2;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-3 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: ship-row-2-3;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-4 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 3;
   grid-area: ship-row-2-4;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-5 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 5;
   grid-area: ship-row-2-5;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-6 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 1;
   grid-area: ship-row-1-6;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-7 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 2;
   grid-area: ship-row-1-7;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-8 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 3;
   grid-area: ship-row-1-8;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-9 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 4;
   grid-area: ship-row-1-9;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .killed {
   outline: 3px solid red;
+  background-color: #b54949;
+}
+
+body .app .app-body div[data-side] .statistics {
+  position: relative;
+  top: -630px;
+  left: 425px;
+  width: 0px;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-rows: (auto)[4];
+      grid-template-rows: repeat(4, auto);
+  gap: 20px 0px;
+      grid-template-areas: "ship-stat-4 out-4"
+ "ship-stat-3 out-3"
+ "ship-stat-2 out-2"
+ "ship-stat-1 out-1";
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat {
+  outline: 3px solid blue;
+  background-color: #3d3dbd;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-4 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-4;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-3;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-2 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-2;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-1 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-1;
+}
+
+body .app .app-body div[data-side] .statistics .out {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22pt;
+  margin-left: 30px;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-shadow: inset 0px 0px 20px 5px white;
+          box-shadow: inset 0px 0px 20px 5px white;
+}
+
+body .app .app-body div[data-side] .statistics .out-4 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: out-4;
+}
+
+body .app .app-body div[data-side] .statistics .out-3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: out-3;
+}
+
+body .app .app-body div[data-side] .statistics .out-2 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: out-2;
+}
+
+body .app .app-body div[data-side] .statistics .out-1 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: out-1;
 }
 
 body .app .app-footer {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
   margin-top: 20px;
+  width: 100%;
+  height: 75px;
+  padding-top: 5px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 body .app .app-footer .app-subtitle {
-  font-size: 13pt;
-  color: rgba(0, 0, 0, 0.5);
+  font-size: 16pt;
+  color: white;
+}
+
+body .app .app-footer .app-subtitle .app-link {
+  color: #ffe500;
+  margin-top: 30px;
+}
+
+body .app .app-footer .app-subtitle .app-link:hover {
+  text-shadow: 0px 0px 10px yellow;
 }

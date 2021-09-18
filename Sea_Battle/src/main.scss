@@ -4,7 +4,7 @@ body{
     margin: 0px;
     font-family: 'Bebas Neue', cursive;
     .app{
-        background: url(../Sea_Battle/img/battleship.jpg) center no-repeat;
+        background: url(../img/battleship.jpg) center no-repeat;
         background-size: cover;
         .app-header{
             padding: 20px 0px 20px 0px;
@@ -70,7 +70,7 @@ body{
                     background: url(../Sea_Battle/img/random.gif) center no-repeat;
                     text-shadow: 0px 0px 10px white;
                     box-shadow: inset 0px 0px 60px 0px black;
-                    background-size: cover;
+                    background-size: 105% 500%;
                 }
             }
             .event{
@@ -133,7 +133,6 @@ body{
                 margin-left: 40px;
                 .battlefield-table{
                     width: 100%;
-                    // z-index: 1000;
                     text-align: center;
                     border-spacing: 0px;
                     border: 1px solid rgba(0, 0, 0, .5);
@@ -193,15 +192,19 @@ body{
                     margin-top: 30px;
                     width: 300px;
                     height: 200px;
-                    // background: url(../Sea_Battle/img/dock.jpg) center no-repeat;
+                    // background: url(../img/dock.jpg) center no-repeat;
                     // background-size: cover;
                     grid-template-columns: repeat(5, 0px);
-                    grid-template-rows: repeat(4, 0px);
+                    grid-template-rows: repeat(5, 0px);
                     gap: 60px 50px;
-                    grid-template-areas: "ship-row-4-0 . . . . "
+                    grid-template-areas: "dock-promp . . . . "
+                                         "ship-row-4-0 . . . . "
                                          "ship-row-3-1 . . ship-row-3-2 ."
                                          "ship-row-2-3 . ship-row-2-4 . ship-row-2-5"
                                          "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
+                    .dock-promp{
+
+                    }
                     .ship{
                         outline: 3px solid rgb(0, 0, 255);
                         background-color: rgb(61, 61, 189);
@@ -253,6 +256,57 @@ body{
                     .killed{
                         outline: 3px solid rgb(255, 0, 0);
                         background-color: rgb(181, 73, 73);
+                    }
+                }
+                .statistics{
+                    position: relative;
+                    top: -630px;
+                    left: 425px;
+                    width: 0px;
+                    // background-color: brown;
+                    display: grid;
+                    align-items: center;
+                    grid-template-rows: repeat(4, auto);
+                    gap: 20px 0px;
+                    grid-template-areas: "ship-stat-4 out-4"
+                                         "ship-stat-3 out-3"
+                                         "ship-stat-2 out-2"
+                                         "ship-stat-1 out-1";
+                    .ship-stat{
+                        outline: 3px solid rgb(0, 0, 255);
+                        background-color: rgb(61, 61, 189);
+                    }
+                    .ship-stat-4{
+                        grid-area: ship-stat-4;
+                    }
+                    .ship-stat-3{
+                        grid-area: ship-stat-3;
+                    }
+                    .ship-stat-2{
+                        grid-area: ship-stat-2;
+                    }
+                    .ship-stat-1{
+                        grid-area: ship-stat-1;
+                    }
+                    .out{
+                        font-family: 'Bebas Neue', cursive;
+                        font-size: 22pt;    
+                        margin-left: 30px;
+                        border-radius: 10px;
+                        text-align: center;
+                        box-shadow: inset 0px 0px 20px 5px white;
+                    }
+                    .out-4{
+                        grid-area: out-4;
+                    }
+                    .out-3{
+                        grid-area: out-3;
+                    }
+                    .out-2{
+                        grid-area: out-2;
+                    }
+                    .out-1{
+                        grid-area: out-1;
                     }
                 }
             }

@@ -9,7 +9,7 @@ body {
 }
 
 body .app {
-  background: url(../Sea_Battle/img/battleship.jpg) center no-repeat;
+  background: url(../img/battleship.jpg) center no-repeat;
   background-size: cover;
 }
 
@@ -108,7 +108,7 @@ body .app .app-body .menu button[data-action="randomize"]:hover {
   text-shadow: 0px 0px 10px white;
   -webkit-box-shadow: inset 0px 0px 60px 0px black;
           box-shadow: inset 0px 0px 60px 0px black;
-  background-size: cover;
+  background-size: 105% 500%;
 }
 
 body .app .app-body .event {
@@ -253,10 +253,10 @@ body .app .app-body div[data-side] .battlefield-dock {
   height: 200px;
   -ms-grid-columns: (0px)[5];
       grid-template-columns: repeat(5, 0px);
-  -ms-grid-rows: (0px)[4];
-      grid-template-rows: repeat(4, 0px);
+  -ms-grid-rows: (0px)[5];
+      grid-template-rows: repeat(5, 0px);
   gap: 60px 50px;
-      grid-template-areas: "ship-row-4-0 . . . . " "ship-row-3-1 . . ship-row-3-2 ." "ship-row-2-3 . ship-row-2-4 . ship-row-2-5" "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
+      grid-template-areas: "dock-promp . . . . " "ship-row-4-0 . . . . " "ship-row-3-1 . . ship-row-3-2 ." "ship-row-2-3 . ship-row-2-4 . ship-row-2-5" "ship-row-1-6 ship-row-1-7 ship-row-1-8 ship-row-1-9 .";
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship {
@@ -281,61 +281,61 @@ body .app .app-body div[data-side] .battlefield-dock .ship-pos-bad {
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-4-0 {
-  -ms-grid-row: 1;
+  -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: ship-row-4-0;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-3-1 {
-  -ms-grid-row: 2;
+  -ms-grid-row: 3;
   -ms-grid-column: 1;
   grid-area: ship-row-3-1;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-3-2 {
-  -ms-grid-row: 2;
+  -ms-grid-row: 3;
   -ms-grid-column: 4;
   grid-area: ship-row-3-2;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-3 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 1;
   grid-area: ship-row-2-3;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-4 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 3;
   grid-area: ship-row-2-4;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-2-5 {
-  -ms-grid-row: 3;
+  -ms-grid-row: 4;
   -ms-grid-column: 5;
   grid-area: ship-row-2-5;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-6 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 1;
   grid-area: ship-row-1-6;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-7 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 2;
   grid-area: ship-row-1-7;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-8 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 3;
   grid-area: ship-row-1-8;
 }
 
 body .app .app-body div[data-side] .battlefield-dock .ship-row-1-9 {
-  -ms-grid-row: 4;
+  -ms-grid-row: 5;
   -ms-grid-column: 4;
   grid-area: ship-row-1-9;
 }
@@ -343,6 +343,85 @@ body .app .app-body div[data-side] .battlefield-dock .ship-row-1-9 {
 body .app .app-body div[data-side] .battlefield-dock .killed {
   outline: 3px solid red;
   background-color: #b54949;
+}
+
+body .app .app-body div[data-side] .statistics {
+  position: relative;
+  top: -630px;
+  left: 425px;
+  width: 0px;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-rows: (auto)[4];
+      grid-template-rows: repeat(4, auto);
+  gap: 20px 0px;
+      grid-template-areas: "ship-stat-4 out-4" "ship-stat-3 out-3" "ship-stat-2 out-2" "ship-stat-1 out-1";
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat {
+  outline: 3px solid blue;
+  background-color: #3d3dbd;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-4 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-4;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-3;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-2 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-2;
+}
+
+body .app .app-body div[data-side] .statistics .ship-stat-1 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: ship-stat-1;
+}
+
+body .app .app-body div[data-side] .statistics .out {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22pt;
+  margin-left: 30px;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-shadow: inset 0px 0px 20px 5px white;
+          box-shadow: inset 0px 0px 20px 5px white;
+}
+
+body .app .app-body div[data-side] .statistics .out-4 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: out-4;
+}
+
+body .app .app-body div[data-side] .statistics .out-3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: out-3;
+}
+
+body .app .app-body div[data-side] .statistics .out-2 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: out-2;
+}
+
+body .app .app-body div[data-side] .statistics .out-1 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 2;
+  grid-area: out-1;
 }
 
 body .app .app-footer {

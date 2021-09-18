@@ -1,6 +1,6 @@
 class Application {
     constructor() {
-        //Создание объектов игоков
+        //Создание объектов игроков
         let divPlayer = document.querySelector("[data-side='player']");
         this.player = new Battlefield(divPlayer);
         let divOpponent = document.querySelector("[data-side='opponent']");
@@ -14,6 +14,7 @@ class Application {
         
         let user = this.player;
         let oppon = this.opponent;
+
         let btnEasy = document.querySelector('[data-computer="easy"]');
         btnEasy.addEventListener("click", function (clk) {
             if (clk.button == 0) {
@@ -36,11 +37,17 @@ class Application {
         //Создание кораблей у player
         this.player.addShips(divPlayer);
         this.opponent.addShips(divOpponent);
+
+        let promp = document.createElement("span");
+        promp.classList.add("dock-promp");
+        promp.innerHTML = "Зажмите левую клавишу мыши и вращайте колёсико мыши, чтобы повернуть:";
+        user.dock.prepend(promp);
         
         //Клик на кнопку "Расставить корабли вручную"
         let btnManually = document.querySelector('[data-action="manually"]');
         btnManually.addEventListener("click", function() {
             divPlayer.children[1].style.visibility = "visible";
+            promp.style.visibility = "visible";
         });
 
         //Изменение направления корабля
@@ -253,6 +260,7 @@ class Application {
         let btnRandomize = document.querySelector('[data-action="randomize"]');
         btnRandomize.addEventListener("click", function () {
             user.dock.style.visibility = "visible";
+            promp.style.visibility = "visible";
             randomize(user);
         });
 
@@ -313,7 +321,52 @@ class Application {
             });
             checkReady();
         }
+    }
 
-        // btnRandomize.click();
+    createStatBlockOpponent() {
+        let statBlock = document.createElement("div");
+        statBlock.classList.add("statistics");
+
+        let td = document.getElementsByTagName("td")[0].getBoundingClientRect();
+
+        let divOpponent = document.querySelector("[data-side='opponent']");
+        divOpponent.append(statBlock);
+
+        for (let x = 4; x > 0; x--) {
+            let shipBlock = document.createElement("div");
+            shipBlock.classList.add("ship-stat", `ship-stat-${x}`);
+            let output = document.createElement("output");
+            output.classList.add("out", `out-${x}`);
+            if (x == 4) {
+                shipBlock.style.width = td.width * 4 + "px";
+                shipBlock.style.height = td.height + "px";
+
+            } else if (x == 3) {
+                shipBlock.style.width = td.width * 3 + "px";
+                shipBlock.style.height = td.height + "px";
+            } else if (x == 2) {
+                shipBlock.style.width = td.width * 2 + "px";
+                shipBlock.style.height = td.height + "px";
+            } else if (x == 1) {
+                shipBlock.style.width = td.width + "px";
+                shipBlock.style.height = td.height + "px";
+            }
+            statBlock.append(shipBlock, output);
+            statBlock.style.gridTemplateColumns = `${td.width * 4}px 50px`;
+        }
+
+    }
+
+    updateStatOp () {
+        for (let x = 4; x > 0; x--) {
+            let output = document.querySelector(`output.out-${x}`);
+            let count = 0;
+            this.opponent.ships.forEach(function (ship) {
+                if (ship.size == x & !(ship.killed)) {
+                    count++
+                }
+            });
+            output.value = count;
+        }
     }
 }
